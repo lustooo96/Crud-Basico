@@ -30,34 +30,72 @@ namespace Crud_Basico
 
 
         }
-        public RegisterForm(Usuario usuario)
+        public RegisterForm(List<Usuario> listUsuarios,Usuario usuario)
         {
             InitializeComponent();
+            listUsuario = listUsuarios;
             CarregarDados(usuario);
             editar = true;
 
         }
         private void SaveRegister_Click(object sender, EventArgs e)
         {
-            string date = DateTime.Now.ToString("dd-MM-yyyy");
-            if (editar)
-            {
-                var usuario = new Usuario(Convert.ToInt32(textoId.Text),textoNome.Text, textoSenha.Text, textoEmail.Text, textoDataNascimento.Text, date);
-                ListOperation.UpdateRegisterInList(listUsuario,usuario);
-            }
-            else 
-            {
-                var usuario = new Usuario(listUsuario.Count + 1,textoNome.Text, textoSenha.Text, textoEmail.Text, textoDataNascimento.Text, date);
-                ListOperation.SaveRegisterInList(listUsuario,usuario);
-            }
-            this.Close();
-        }
+            string dataAtual = DateTime.Now.ToString("dd-MM-yyyy").Replace("-","/");
+            bool validacao = validForm(textoSenha.Text, textoEmail.Text);
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+            if (validacao) 
+            {
+                if (editar)
+                {
+                    var usuario = new Usuario(Convert.ToInt32(textoId.Text), textoNome.Text, textoSenha.Text, textoEmail.Text, textoDataNascimento.Text, dataAtual);
+                    ListOperation.UpdateRegisterInList(listUsuario, usuario);
+                }
+                else
+                {
+                    var usuario = new Usuario(ListOperation.ContadorDeIncide(listUsuario), textoNome.Text, textoSenha.Text, textoEmail.Text, textoDataNascimento.Text, dataAtual);
+                    ListOperation.SaveRegisterInList(listUsuario, usuario);
+                }
+                this.Close();
+            }
+        }
+        private bool validForm(string senha , string email) 
         {
+            var validacaoSenha = ValidDataUser.ValidarSenha(senha);
+            var validacaoEmail = ValidDataUser.ValidarEmail(email);
 
+            if(!validacaoSenha || !validacaoEmail) 
+            {
+
+                if (textoNome.Text == "")
+                {
+                    errorProvider1.SetError(textoNome, "Informe o seu nome");
+                }
+
+                if (!validacaoSenha && textoSenha.Text == "")
+                {
+                    errorProvider2.SetError(textoSenha, "Senha inválida");
+                }
+
+                else if(!validacaoSenha)
+                {
+                    errorProvider2.SetError(textoSenha, "Senha Incorreta");
+                }
+
+
+                if (textoEmail.Text == "")
+                {
+                    errorProvider3.SetError(textoEmail, "Necéssario informar um e-mail");
+                }
+                else if(!validacaoEmail)
+                {
+                    errorProvider3.SetError(textoEmail, "Email Incorreto");
+                }
+
+                return false;
+            }
+
+            return true;
         }
-
         private void CarregarDados(Usuario usuario) 
         {
 
@@ -74,15 +112,28 @@ namespace Crud_Basico
             textoDataCriacao.Visible = true;
             labelDataCriacao.Visible = true;
         }
-
-        private void textId_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cancelOperation_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void TextoNome_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.Clear();
+        }
+        private void TextoSenha_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider2.Clear();
+        }
+
+        private void TextoEmail_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider3.Clear();
+        }
+
+        private void TextoDataNascimento_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            errorProvider4.Clear();
         }
     }
 }

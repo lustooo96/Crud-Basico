@@ -16,13 +16,30 @@ namespace Crud_Basico
         private void DeletarRegistro_Click(object sender, EventArgs e)
         {
             var user = new Usuario();
-            ListOperation.DeleteRegisterInList(listaUsuarios, user);
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+              
+                var usuario = new Usuario();
+                ListOperation.DeleteRegisterInList(listaUsuarios, Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
+
+                if(listaUsuarios.Count == 0)
+                {
+                    dataGridView1.ColumnHeadersVisible = false;
+                    dataGridView1.RowHeadersVisible = false;
+                }
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = listaUsuarios.ToList();
+
+                
+
+
+            }
         }
 
         private void EditarRegistro_Click(object sender, EventArgs e)
         {
 
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0 && Application.OpenForms["RegisterForm"] == null)
             {
                 var usuario = new Usuario();
                 usuario.Id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString());
@@ -31,7 +48,7 @@ namespace Crud_Basico
                 usuario.Email = dataGridView1.CurrentRow.Cells["Email"].Value.ToString();
                 usuario.DataNascimento = dataGridView1.CurrentRow.Cells["DataNascimento"].Value.ToString();
                 usuario.DataCriacao = dataGridView1.CurrentRow.Cells["DataCriacao"].Value.ToString();
-                var registerScreen = new RegisterForm(usuario);
+                var registerScreen = new RegisterForm(listaUsuarios,usuario);
                 registerScreen.Show();
             }
            
@@ -47,17 +64,23 @@ namespace Crud_Basico
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FecharTela_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            if (listaUsuarios.Count > 0) 
+            if (listaUsuarios.Count > 0)
             {
+                if (listaUsuarios.Count > 0 && !dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
+                {
+                    dataGridView1.ColumnHeadersVisible = true;
+                    dataGridView1.RowHeadersVisible = true;
+                }
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = listaUsuarios.ToList();
+
             }
             
         }

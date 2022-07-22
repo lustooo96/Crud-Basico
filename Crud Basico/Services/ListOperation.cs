@@ -9,30 +9,49 @@ namespace Crud_Basico.Services
 {
     class ListOperation
     {
-        public static List<Usuario> SaveRegisterInList(List<Usuario> listUser ,Usuario usuario) 
+        public static List<Usuario> SaveRegisterInList(List<Usuario> listaUsuarios, Usuario usuario) 
         {
-            listUser.Add(usuario);
+            listaUsuarios.Add(usuario);
 
-            return listUser;
+            return listaUsuarios;
         }
-        public static List<Usuario> UpdateRegisterInList(List<Usuario> listUser, Usuario usuario) 
+        public static List<Usuario> UpdateRegisterInList(List<Usuario> listaUsuarios, Usuario usuario) 
         {
-            listUser.Add(usuario);
-
-            return listUser;
+            foreach (Usuario listaUsuario in listaUsuarios) 
+            {
+                if (listaUsuario.Id == usuario.Id) 
+                {
+                    listaUsuario.Nome = usuario.Nome;
+                    listaUsuario.Senha = usuario.Senha;
+                    listaUsuario.Email = usuario.Email;
+                    listaUsuario.DataNascimento = usuario.DataNascimento;
+                    listaUsuario.DataCriacao = usuario.DataCriacao;
+                }
+            }
+            return listaUsuarios;
         }
-        public static List<Usuario> DeleteRegisterInList(List<Usuario> listUser, Usuario userId) 
+        public static List<Usuario> DeleteRegisterInList(List<Usuario> listaUsuarios, int id) 
         {
-            listUser.Remove(userId);
+            listaUsuarios.RemoveAll(v => v.Id == id);
 
-            return listUser;
+            return listaUsuarios;
         }
 
-        public static List<Usuario> UpdateRegisterInList(List<Usuario> listUser, Usuario userId) 
-        {
+        public static int ContadorDeIncide(List<Usuario> listaUsuarios) 
+        { 
+            if(listaUsuarios.Count == 0) 
+            {
+                return listaUsuarios.Count + 1;
+            }
+            else 
+            {
+                return listaUsuarios[listaUsuarios.Count - 1].Id + 1;
+            }
 
 
-            return listUser;
+            return 0;
         }
+
+
     }
 }
