@@ -28,6 +28,10 @@ namespace Crud_Basico
                     }
                     dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
             }
+            else 
+            {
+                MessageBox.Show("Selecione um usuario para deletar", "Deletar Usuario");
+            }
         }
         private void EditarRegistro_Click(object sender, EventArgs e)
         {
@@ -46,7 +50,7 @@ namespace Crud_Basico
             }
             else 
             {
-                MessageBox.Show("Selecionar um usuario para editar","Selecione o Usuario");
+                MessageBox.Show("Selecione um usuario para editar","Editar Usuario");
             }
         }
 
