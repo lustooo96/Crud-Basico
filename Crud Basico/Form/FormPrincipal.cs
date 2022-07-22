@@ -26,7 +26,6 @@ namespace Crud_Basico
                         dataGridView1.ColumnHeadersVisible = false;
                         dataGridView1.RowHeadersVisible = false;
                     }
-                    dataGridView1.DataSource = null;
                     dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
             }
         }
@@ -44,6 +43,10 @@ namespace Crud_Basico
                 var registerScreen = new FormRegistro(usuario);
 
                 registerScreen.ShowDialog();
+            }
+            else 
+            {
+                MessageBox.Show("Selecionar um usuario para editar","Selecione o Usuario");
             }
         }
 
@@ -72,7 +75,6 @@ namespace Crud_Basico
                     dataGridView1.ColumnHeadersVisible = true;
                     dataGridView1.RowHeadersVisible = true;
                 }
-                dataGridView1.DataSource = null;
                 dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
                 dataGridView1.Columns["Senha"].Visible = false;
             }

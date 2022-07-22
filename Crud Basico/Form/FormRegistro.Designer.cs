@@ -110,7 +110,6 @@
             this.textoSenha.PasswordChar = '*';
             this.textoSenha.Size = new System.Drawing.Size(246, 23);
             this.textoSenha.TabIndex = 18;
-            this.textoSenha.TextChanged += new System.EventHandler(this.TextoSenha_TextChanged);
             // 
             // labelDataNascimento
             // 
@@ -132,7 +131,6 @@
             this.textoDataNascimento.Size = new System.Drawing.Size(68, 23);
             this.textoDataNascimento.TabIndex = 15;
             this.textoDataNascimento.ValidatingType = typeof(System.DateTime);
-            this.textoDataNascimento.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.TextoDataNascimento_MaskInputRejected);
             // 
             // labelEmail
             // 
@@ -153,7 +151,6 @@
             this.textoEmail.Name = "textoEmail";
             this.textoEmail.Size = new System.Drawing.Size(246, 23);
             this.textoEmail.TabIndex = 12;
-            this.textoEmail.TextChanged += new System.EventHandler(this.TextoEmail_TextChanged);
             // 
             // labelSenha
             // 
@@ -205,7 +202,6 @@
             this.textoNome.Name = "textoNome";
             this.textoNome.Size = new System.Drawing.Size(246, 23);
             this.textoNome.TabIndex = 2;
-            this.textoNome.TextChanged += new System.EventHandler(this.TextoNome_TextChanged);
             // 
             // cancelOperation
             // 
@@ -264,6 +260,7 @@
             this.ClientSize = new System.Drawing.Size(424, 381);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormRegistro";
             this.Text = "Novo Usuário";
             this.panel1.ResumeLayout(false);

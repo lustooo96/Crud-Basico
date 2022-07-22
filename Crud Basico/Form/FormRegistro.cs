@@ -11,7 +11,6 @@ namespace Crud_Basico
         {
             InitializeComponent();
         }
-
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
@@ -19,7 +18,6 @@ namespace Crud_Basico
             editar = true;
 
         }
-
         //Ao clicar em um botão 
         private void SalvarRegistro_Click(object sender, EventArgs e)
         {
@@ -47,74 +45,10 @@ namespace Crud_Basico
 
             this.Close();
         }
-
         private void CancelarOperacao_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        //Quando os campos de textos mudarem
-        private void TextoNome_TextChanged(object sender, EventArgs e)
-        {
-            erroNome.Clear();
-        }
-
-        private void TextoSenha_TextChanged(object sender, EventArgs e)
-        {
-            erroSenha.Clear();
-        }
-
-        private void TextoEmail_TextChanged(object sender, EventArgs e)
-        {
-            erroEmail.Clear();
-        }
-
-        private void TextoDataNascimento_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            //Colocar um if para validar o erro antes de limpar
-            erroData.Clear();
-        }
-
-
-        //Metodos do proprio Form(Criados)
-        private bool ValidarFormRegistro(string senha, string email, string data)
-        {
-            var validacaoSenha = Validacao.ValidarSenha(senha);
-            var validacaoEmail = Validacao.ValidarEmail(email);
-
-            if (!validacaoSenha || !validacaoEmail)
-            {
-                if (textoNome.Text == "")
-                {
-                    erroNome.SetError(textoNome, "Informe o seu nome");
-                }
-
-                if (!validacaoSenha && textoSenha.Text == "")
-                {
-                    erroSenha.SetError(textoSenha, "Senha Inválida");
-                }
-
-                else if (!validacaoSenha)
-                {
-                    erroSenha.SetError(textoSenha, "Senha Incorreta");
-                }
-
-
-                if (textoEmail.Text == "")
-                {
-                    erroEmail.SetError(textoEmail, "Necéssario informar um e-mail");
-                }
-                else if (!validacaoEmail)
-                {
-                    erroEmail.SetError(textoEmail, "Email Incorreto");
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
         private void CarregarDados(Usuario usuario)
         {
             textoId.Text = usuario.Id.ToString();

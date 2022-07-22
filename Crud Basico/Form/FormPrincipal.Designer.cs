@@ -76,7 +76,7 @@
             this.fecharTela.Name = "fecharTela";
             this.fecharTela.Size = new System.Drawing.Size(75, 28);
             this.fecharTela.TabIndex = 5;
-            this.fecharTela.Text = "Cancelar";
+            this.fecharTela.Text = "Sair";
             this.fecharTela.UseVisualStyleBackColor = false;
             this.fecharTela.Click += new System.EventHandler(this.FecharTela_Click);
             // 
