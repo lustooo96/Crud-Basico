@@ -43,7 +43,7 @@ namespace Crud_Basico
                 usuario.DataCriacao = dataGridView1.CurrentRow.Cells["DataCriacao"].Value.ToString();
                 var registerScreen = new FormRegistro(usuario);
 
-                registerScreen.Show();
+                registerScreen.ShowDialog();
             }
         }
 
@@ -53,7 +53,7 @@ namespace Crud_Basico
 
             if (Application.OpenForms["RegisterForm"] == null) 
             {
-                registerScreen.Show();
+                registerScreen.ShowDialog();
             }
         }
 
@@ -63,11 +63,11 @@ namespace Crud_Basico
         }
 
         //Medodo
-        private void Form1_Activated(object sender, EventArgs e)
+        private void FormPrincipal_Activated(object sender, EventArgs e)
         {
             if (ListaUsuario.ListaUsuarios.Count > 0)
             {
-                if (ListaUsuario.ListaUsuarios.Count > 0 && !dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
+                if (!dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
                 {
                     dataGridView1.ColumnHeadersVisible = true;
                     dataGridView1.RowHeadersVisible = true;
