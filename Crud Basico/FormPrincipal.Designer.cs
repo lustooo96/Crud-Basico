@@ -1,6 +1,6 @@
 ﻿namespace Crud_Basico
 {
-    partial class Form1
+    partial class FormPrincipal
     {
         /// <summary>
         ///  Required designer variable.
@@ -59,7 +59,7 @@
             this.fecharTela.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.fecharTela.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.fecharTela.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.fecharTela.Location = new System.Drawing.Point(36, 382);
+            this.fecharTela.Location = new System.Drawing.Point(12, 382);
             this.fecharTela.Name = "fecharTela";
             this.fecharTela.Size = new System.Drawing.Size(75, 27);
             this.fecharTela.TabIndex = 5;
@@ -76,7 +76,7 @@
             this.novoRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.novoRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.novoRegistro.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.novoRegistro.Location = new System.Drawing.Point(405, 382);
+            this.novoRegistro.Location = new System.Drawing.Point(440, 382);
             this.novoRegistro.Name = "novoRegistro";
             this.novoRegistro.Size = new System.Drawing.Size(75, 27);
             this.novoRegistro.TabIndex = 4;
@@ -92,7 +92,7 @@
             this.DeletarRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.DeletarRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeletarRegistro.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DeletarRegistro.Location = new System.Drawing.Point(597, 382);
+            this.DeletarRegistro.Location = new System.Drawing.Point(602, 382);
             this.DeletarRegistro.Name = "DeletarRegistro";
             this.DeletarRegistro.Size = new System.Drawing.Size(75, 27);
             this.DeletarRegistro.TabIndex = 2;
@@ -108,7 +108,7 @@
             this.editarRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.editarRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editarRegistro.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.editarRegistro.Location = new System.Drawing.Point(501, 382);
+            this.editarRegistro.Location = new System.Drawing.Point(521, 382);
             this.editarRegistro.Name = "editarRegistro";
             this.editarRegistro.Size = new System.Drawing.Size(75, 27);
             this.editarRegistro.TabIndex = 1;
@@ -128,13 +128,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(665, 347);
             this.dataGridView1.TabIndex = 0;
             // 
-            // Form1
+            // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 421);
             this.Controls.Add(this.panel2);
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.Text = "Cadastro de usuarios";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.panel2.ResumeLayout(false);

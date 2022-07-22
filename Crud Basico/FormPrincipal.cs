@@ -3,43 +3,36 @@ using Crud_Basico.Services;
 
 namespace Crud_Basico
 {
-    public partial class Form1 : Form
+    public partial class FormPrincipal : Form
     {
-        static List<Usuario> listaUsuarios = new List<Usuario>();
-
-        public Form1()
+        
+        //Construtor 
+        public FormPrincipal()
         {
             InitializeComponent();
-
         }
 
+        //Ao clicar em Algum botão
         private void DeletarRegistro_Click(object sender, EventArgs e)
         {
             var user = new Usuario();
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedCells.Count > 0)
             {
-              
-                var usuario = new Usuario();
-                ListOperation.DeleteRegisterInList(listaUsuarios, Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
+                    var usuario = new Usuario();
+                    ListaUsuario.DeletarRegistro(Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
 
-                if(listaUsuarios.Count == 0)
-                {
-                    dataGridView1.ColumnHeadersVisible = false;
-                    dataGridView1.RowHeadersVisible = false;
-                }
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = listaUsuarios.ToList();
-
-                
-
-
+                    if(ListaUsuario.ListaUsuarios.Count == 0)
+                    {
+                        dataGridView1.ColumnHeadersVisible = false;
+                        dataGridView1.RowHeadersVisible = false;
+                    }
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
             }
         }
-
         private void EditarRegistro_Click(object sender, EventArgs e)
         {
-
-            if (dataGridView1.SelectedRows.Count > 0 && Application.OpenForms["RegisterForm"] == null)
+            if (dataGridView1.SelectedCells.Count > 0 && Application.OpenForms["RegisterForm"] == null)
             {
                 var usuario = new Usuario();
                 usuario.Id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString());
@@ -48,15 +41,15 @@ namespace Crud_Basico
                 usuario.Email = dataGridView1.CurrentRow.Cells["Email"].Value.ToString();
                 usuario.DataNascimento = dataGridView1.CurrentRow.Cells["DataNascimento"].Value.ToString();
                 usuario.DataCriacao = dataGridView1.CurrentRow.Cells["DataCriacao"].Value.ToString();
-                var registerScreen = new RegisterForm(listaUsuarios,usuario);
+                var registerScreen = new FormRegistro(usuario);
+
                 registerScreen.Show();
             }
-           
-
         }
+
         private void NovoRegistro_Click(object sender, EventArgs e)
         {
-            var registerScreen = new RegisterForm(listaUsuarios);
+            var registerScreen = new FormRegistro();
 
             if (Application.OpenForms["RegisterForm"] == null) 
             {
@@ -69,20 +62,20 @@ namespace Crud_Basico
             this.Close();
         }
 
+        //Medodo
         private void Form1_Activated(object sender, EventArgs e)
         {
-            if (listaUsuarios.Count > 0)
+            if (ListaUsuario.ListaUsuarios.Count > 0)
             {
-                if (listaUsuarios.Count > 0 && !dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
+                if (ListaUsuario.ListaUsuarios.Count > 0 && !dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
                 {
                     dataGridView1.ColumnHeadersVisible = true;
                     dataGridView1.RowHeadersVisible = true;
                 }
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = listaUsuarios.ToList();
-
+                dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
+                dataGridView1.Columns["Senha"].Visible = false;
             }
-            
         }
     }
 }

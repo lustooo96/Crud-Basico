@@ -1,6 +1,6 @@
 ﻿namespace Crud_Basico
 {
-    partial class RegisterForm
+    partial class FormRegistro
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,7 @@
             // labelDataCriacao
             // 
             this.labelDataCriacao.AutoSize = true;
-            this.labelDataCriacao.Location = new System.Drawing.Point(10, 255);
+            this.labelDataCriacao.Location = new System.Drawing.Point(24, 258);
             this.labelDataCriacao.Name = "labelDataCriacao";
             this.labelDataCriacao.Size = new System.Drawing.Size(74, 15);
             this.labelDataCriacao.TabIndex = 19;
@@ -112,7 +112,7 @@
             // labelDataNascimento
             // 
             this.labelDataNascimento.AutoSize = true;
-            this.labelDataNascimento.Location = new System.Drawing.Point(3, 210);
+            this.labelDataNascimento.Location = new System.Drawing.Point(0, 210);
             this.labelDataNascimento.Name = "labelDataNascimento";
             this.labelDataNascimento.Size = new System.Drawing.Size(98, 15);
             this.labelDataNascimento.TabIndex = 17;
@@ -132,7 +132,7 @@
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(40, 167);
+            this.labelEmail.Location = new System.Drawing.Point(52, 167);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(46, 15);
             this.labelEmail.TabIndex = 13;
@@ -142,14 +142,14 @@
             // 
             this.textoEmail.Location = new System.Drawing.Point(107, 164);
             this.textoEmail.Name = "textoEmail";
-            this.textoEmail.Size = new System.Drawing.Size(178, 23);
+            this.textoEmail.Size = new System.Drawing.Size(246, 23);
             this.textoEmail.TabIndex = 12;
             this.textoEmail.TextChanged += new System.EventHandler(this.TextoEmail_TextChanged);
             // 
             // labelSenha
             // 
             this.labelSenha.AutoSize = true;
-            this.labelSenha.Location = new System.Drawing.Point(40, 121);
+            this.labelSenha.Location = new System.Drawing.Point(54, 126);
             this.labelSenha.Name = "labelSenha";
             this.labelSenha.Size = new System.Drawing.Size(44, 15);
             this.labelSenha.TabIndex = 9;
@@ -158,7 +158,7 @@
             // labelNome
             // 
             this.labelNome.AutoSize = true;
-            this.labelNome.Location = new System.Drawing.Point(40, 65);
+            this.labelNome.Location = new System.Drawing.Point(53, 78);
             this.labelNome.Name = "labelNome";
             this.labelNome.Size = new System.Drawing.Size(45, 15);
             this.labelNome.TabIndex = 8;
@@ -167,7 +167,7 @@
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(57, 24);
+            this.labelId.Location = new System.Drawing.Point(81, 30);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(17, 15);
             this.labelId.TabIndex = 7;
@@ -176,16 +176,16 @@
             // 
             // textoId
             // 
-            this.textoId.Location = new System.Drawing.Point(107, 21);
+            this.textoId.Location = new System.Drawing.Point(107, 27);
             this.textoId.Name = "textoId";
             this.textoId.ReadOnly = true;
-            this.textoId.Size = new System.Drawing.Size(81, 23);
+            this.textoId.Size = new System.Drawing.Size(65, 23);
             this.textoId.TabIndex = 6;
             this.textoId.Visible = false;
             // 
             // textoNome
             // 
-            this.textoNome.Location = new System.Drawing.Point(107, 62);
+            this.textoNome.Location = new System.Drawing.Point(107, 70);
             this.textoNome.Name = "textoNome";
             this.textoNome.Size = new System.Drawing.Size(246, 23);
             this.textoNome.TabIndex = 2;
@@ -199,7 +199,7 @@
             this.cancelOperation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cancelOperation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelOperation.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cancelOperation.Location = new System.Drawing.Point(226, 309);
+            this.cancelOperation.Location = new System.Drawing.Point(242, 309);
             this.cancelOperation.Name = "cancelOperation";
             this.cancelOperation.Size = new System.Drawing.Size(75, 27);
             this.cancelOperation.TabIndex = 1;
@@ -215,7 +215,7 @@
             this.saveRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.saveRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveRegister.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.saveRegister.Location = new System.Drawing.Point(118, 309);
+            this.saveRegister.Location = new System.Drawing.Point(149, 309);
             this.saveRegister.Name = "saveRegister";
             this.saveRegister.Size = new System.Drawing.Size(75, 27);
             this.saveRegister.TabIndex = 0;
