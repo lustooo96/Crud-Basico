@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textoDataNascimento = new System.Windows.Forms.DateTimePicker();
             this.textoDataCriacao = new System.Windows.Forms.MaskedTextBox();
             this.labelDataCriacao = new System.Windows.Forms.Label();
             this.textoSenha = new System.Windows.Forms.TextBox();
             this.labelDataNascimento = new System.Windows.Forms.Label();
-            this.textoDataNascimento = new System.Windows.Forms.MaskedTextBox();
             this.labelEmail = new System.Windows.Forms.Label();
             this.textoEmail = new System.Windows.Forms.TextBox();
             this.labelSenha = new System.Windows.Forms.Label();
@@ -57,11 +57,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textoDataNascimento);
             this.panel1.Controls.Add(this.textoDataCriacao);
             this.panel1.Controls.Add(this.labelDataCriacao);
             this.panel1.Controls.Add(this.textoSenha);
             this.panel1.Controls.Add(this.labelDataNascimento);
-            this.panel1.Controls.Add(this.textoDataNascimento);
             this.panel1.Controls.Add(this.labelEmail);
             this.panel1.Controls.Add(this.textoEmail);
             this.panel1.Controls.Add(this.labelSenha);
@@ -76,6 +76,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 381);
             this.panel1.TabIndex = 1;
+            // 
+            // textoDataNascimento
+            // 
+            this.textoDataNascimento.Checked = false;
+            this.textoDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.textoDataNascimento.Location = new System.Drawing.Point(129, 213);
+            this.textoDataNascimento.Name = "textoDataNascimento";
+            this.textoDataNascimento.Size = new System.Drawing.Size(91, 23);
+            this.textoDataNascimento.TabIndex = 3;
+            this.textoDataNascimento.ValueChanged += new System.EventHandler(this.textoDataNascimento_ValueChanged);
             // 
             // textoDataCriacao
             // 
@@ -110,6 +120,7 @@
             this.textoSenha.PasswordChar = '*';
             this.textoSenha.Size = new System.Drawing.Size(246, 23);
             this.textoSenha.TabIndex = 1;
+            this.textoSenha.TextChanged += new System.EventHandler(this.textoSenha_TextChanged);
             // 
             // labelDataNascimento
             // 
@@ -120,17 +131,6 @@
             this.labelDataNascimento.Size = new System.Drawing.Size(98, 15);
             this.labelDataNascimento.TabIndex = 17;
             this.labelDataNascimento.Text = "Data Nascimento";
-            // 
-            // textoDataNascimento
-            // 
-            this.textoDataNascimento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textoDataNascimento.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
-            this.textoDataNascimento.Location = new System.Drawing.Point(129, 210);
-            this.textoDataNascimento.Mask = "00/00/0000";
-            this.textoDataNascimento.Name = "textoDataNascimento";
-            this.textoDataNascimento.Size = new System.Drawing.Size(68, 23);
-            this.textoDataNascimento.TabIndex = 3;
-            this.textoDataNascimento.ValidatingType = typeof(System.DateTime);
             // 
             // labelEmail
             // 
@@ -151,6 +151,7 @@
             this.textoEmail.Name = "textoEmail";
             this.textoEmail.Size = new System.Drawing.Size(246, 23);
             this.textoEmail.TabIndex = 2;
+            this.textoEmail.TextChanged += new System.EventHandler(this.textoEmail_TextChanged);
             // 
             // labelSenha
             // 
@@ -202,6 +203,7 @@
             this.textoNome.Name = "textoNome";
             this.textoNome.Size = new System.Drawing.Size(246, 23);
             this.textoNome.TabIndex = 0;
+            this.textoNome.TextChanged += new System.EventHandler(this.textoNome_TextChanged);
             // 
             // cancelOperation
             // 
@@ -229,6 +231,7 @@
             this.saveRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.saveRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveRegister.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.saveRegister.ForeColor = System.Drawing.Color.MidnightBlue;
             this.saveRegister.Location = new System.Drawing.Point(145, 309);
             this.saveRegister.Name = "saveRegister";
             this.saveRegister.Size = new System.Drawing.Size(75, 27);
@@ -277,7 +280,6 @@
         #endregion
 
         private Panel panel1;
-        private MaskedTextBox textoDataNascimento;
         private Label labelEmail;
         private TextBox textoEmail;
         private Label labelSenha;
@@ -295,5 +297,6 @@
         private ErrorProvider erroSenha;
         private ErrorProvider erroEmail;
         private ErrorProvider erroData;
+        private DateTimePicker textoDataNascimento;
     }
 }

@@ -86,7 +86,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
@@ -103,6 +102,7 @@
             this.editarRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.editarRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editarRegistro.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.editarRegistro.ForeColor = System.Drawing.Color.MidnightBlue;
             this.editarRegistro.Location = new System.Drawing.Point(521, 381);
             this.editarRegistro.Name = "editarRegistro";
             this.editarRegistro.Size = new System.Drawing.Size(75, 28);
@@ -140,6 +140,7 @@
             this.DeletarRegistro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.DeletarRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeletarRegistro.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.DeletarRegistro.ForeColor = System.Drawing.Color.Red;
             this.DeletarRegistro.Location = new System.Drawing.Point(602, 381);
             this.DeletarRegistro.Name = "DeletarRegistro";
             this.DeletarRegistro.Size = new System.Drawing.Size(75, 28);
@@ -154,6 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 421);
             this.Controls.Add(this.panel2);
+            this.MinimumSize = new System.Drawing.Size(450, 350);
             this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Usuário";

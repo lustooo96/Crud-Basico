@@ -11,13 +11,10 @@ namespace Crud_Basico
         }
         private void DeletarRegistro_Click(object sender, EventArgs e)
         {
-            var user = new Usuario();
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                    var usuario = new Usuario();
-                    UsuarioOperacoes.DeletarRegistro(Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
-
-                    if(UsuarioAcoes.QuantidadeUsuarios() == 0)
+                    UsuarioOperacao.DeletarRegistro(Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
+                    if(UsuarioAcao.QuantidadeUsuarios() == 0)
                     {
                         dataGridView1.ColumnHeadersVisible = false;
                         dataGridView1.RowHeadersVisible = false;
@@ -31,7 +28,7 @@ namespace Crud_Basico
         }
         private void EditarRegistro_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedCells.Count > 0 && Application.OpenForms["RegisterForm"] == null)
+            if (dataGridView1.SelectedCells.Count > 0)
             {
                 var usuario = new Usuario();
                 usuario.Id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString());
@@ -52,11 +49,7 @@ namespace Crud_Basico
         private void NovoRegistro_Click(object sender, EventArgs e)
         {
             var registerScreen = new FormRegistro();
-
-            if (Application.OpenForms["RegisterForm"] == null) 
-            {
-                registerScreen.ShowDialog();
-            }
+            registerScreen.ShowDialog();
         }
         private void FecharTela_Click(object sender, EventArgs e)
         {
@@ -64,7 +57,7 @@ namespace Crud_Basico
         }
         private void FormPrincipal_Activated(object sender, EventArgs e)
         {
-            if (UsuarioAcoes.QuantidadeUsuarios() > 0)
+            if (UsuarioAcao.QuantidadeUsuarios() > 0)
             {
                 if (!dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
                 {

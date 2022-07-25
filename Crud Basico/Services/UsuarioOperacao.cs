@@ -2,7 +2,7 @@
 
 namespace Crud_Basico.Services
 {
-    class UsuarioOperacoes : ListaUsuario
+    class UsuarioOperacao : ListaUsuario
     {
         public static void SalvarRegistro(Usuario usuario)
         {
