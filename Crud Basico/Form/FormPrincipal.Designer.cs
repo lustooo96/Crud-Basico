@@ -85,6 +85,7 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
@@ -154,7 +155,8 @@
             this.ClientSize = new System.Drawing.Size(689, 421);
             this.Controls.Add(this.panel2);
             this.Name = "FormPrincipal";
-            this.Text = "Cadastro de usuarios";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Cadastro de Usuário";
             this.Activated += new System.EventHandler(this.FormPrincipal_Activated);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

@@ -5,32 +5,28 @@ namespace Crud_Basico
 {
     public partial class FormPrincipal : Form
     {
-        
-        //Construtor 
         public FormPrincipal()
         {
             InitializeComponent();
         }
-
-        //Ao clicar em Algum botão
         private void DeletarRegistro_Click(object sender, EventArgs e)
         {
             var user = new Usuario();
             if (dataGridView1.SelectedCells.Count > 0)
             {
                     var usuario = new Usuario();
-                    ListaUsuario.DeletarRegistro(Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
+                    UsuarioOperacoes.DeletarRegistro(Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value.ToString()));
 
-                    if(ListaUsuario.ListaUsuarios.Count == 0)
+                    if(UsuarioAcoes.QuantidadeUsuarios() == 0)
                     {
                         dataGridView1.ColumnHeadersVisible = false;
                         dataGridView1.RowHeadersVisible = false;
                     }
-                    dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
+                    dataGridView1.DataSource = UsuarioView.MostrarUsuarios();
             }
             else 
             {
-                MessageBox.Show("Selecione um usuario para deletar", "Deletar Usuario");
+                MessageBox.Show("Selecione um usuário para deletar", "Deletar Usuário");
             }
         }
         private void EditarRegistro_Click(object sender, EventArgs e)
@@ -50,10 +46,9 @@ namespace Crud_Basico
             }
             else 
             {
-                MessageBox.Show("Selecione um usuario para editar","Editar Usuario");
+                MessageBox.Show("Selecione um usuário para editar","Editar Usuário");
             }
         }
-
         private void NovoRegistro_Click(object sender, EventArgs e)
         {
             var registerScreen = new FormRegistro();
@@ -63,23 +58,20 @@ namespace Crud_Basico
                 registerScreen.ShowDialog();
             }
         }
-
         private void FecharTela_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        //Medodo
         private void FormPrincipal_Activated(object sender, EventArgs e)
         {
-            if (ListaUsuario.ListaUsuarios.Count > 0)
+            if (UsuarioAcoes.QuantidadeUsuarios() > 0)
             {
                 if (!dataGridView1.ColumnHeadersVisible && !dataGridView1.RowHeadersVisible)
                 {
                     dataGridView1.ColumnHeadersVisible = true;
                     dataGridView1.RowHeadersVisible = true;
                 }
-                dataGridView1.DataSource = ListaUsuario.ListaUsuarios.ToList();
+                dataGridView1.DataSource = UsuarioView.MostrarUsuarios();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
         }

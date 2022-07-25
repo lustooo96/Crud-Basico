@@ -86,7 +86,7 @@
             this.textoDataCriacao.Name = "textoDataCriacao";
             this.textoDataCriacao.ReadOnly = true;
             this.textoDataCriacao.Size = new System.Drawing.Size(68, 23);
-            this.textoDataCriacao.TabIndex = 20;
+            this.textoDataCriacao.TabIndex = 4;
             this.textoDataCriacao.ValidatingType = typeof(System.DateTime);
             this.textoDataCriacao.Visible = false;
             // 
@@ -109,7 +109,7 @@
             this.textoSenha.Name = "textoSenha";
             this.textoSenha.PasswordChar = '*';
             this.textoSenha.Size = new System.Drawing.Size(246, 23);
-            this.textoSenha.TabIndex = 18;
+            this.textoSenha.TabIndex = 1;
             // 
             // labelDataNascimento
             // 
@@ -129,7 +129,7 @@
             this.textoDataNascimento.Mask = "00/00/0000";
             this.textoDataNascimento.Name = "textoDataNascimento";
             this.textoDataNascimento.Size = new System.Drawing.Size(68, 23);
-            this.textoDataNascimento.TabIndex = 15;
+            this.textoDataNascimento.TabIndex = 3;
             this.textoDataNascimento.ValidatingType = typeof(System.DateTime);
             // 
             // labelEmail
@@ -150,7 +150,7 @@
             this.textoEmail.MaxLength = 30;
             this.textoEmail.Name = "textoEmail";
             this.textoEmail.Size = new System.Drawing.Size(246, 23);
-            this.textoEmail.TabIndex = 12;
+            this.textoEmail.TabIndex = 2;
             // 
             // labelSenha
             // 
@@ -201,7 +201,7 @@
             this.textoNome.MaxLength = 30;
             this.textoNome.Name = "textoNome";
             this.textoNome.Size = new System.Drawing.Size(246, 23);
-            this.textoNome.TabIndex = 2;
+            this.textoNome.TabIndex = 0;
             // 
             // cancelOperation
             // 
@@ -215,7 +215,7 @@
             this.cancelOperation.Location = new System.Drawing.Point(242, 309);
             this.cancelOperation.Name = "cancelOperation";
             this.cancelOperation.Size = new System.Drawing.Size(75, 27);
-            this.cancelOperation.TabIndex = 1;
+            this.cancelOperation.TabIndex = 6;
             this.cancelOperation.Text = "Cancelar";
             this.cancelOperation.UseVisualStyleBackColor = false;
             this.cancelOperation.Click += new System.EventHandler(this.CancelarOperacao_Click);
@@ -232,7 +232,7 @@
             this.saveRegister.Location = new System.Drawing.Point(145, 309);
             this.saveRegister.Name = "saveRegister";
             this.saveRegister.Size = new System.Drawing.Size(75, 27);
-            this.saveRegister.TabIndex = 0;
+            this.saveRegister.TabIndex = 5;
             this.saveRegister.Text = "Salvar";
             this.saveRegister.UseVisualStyleBackColor = false;
             this.saveRegister.Click += new System.EventHandler(this.SalvarRegistro_Click);
@@ -262,6 +262,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormRegistro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novo Usuário";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

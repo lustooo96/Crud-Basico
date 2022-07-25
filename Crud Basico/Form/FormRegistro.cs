@@ -6,7 +6,7 @@ namespace Crud_Basico
     public partial class FormRegistro : Form
     {
         bool editar = false;
-        //Construtores
+
         public FormRegistro()
         {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace Crud_Basico
             editar = true;
 
         }
-        //Ao clicar em um botão 
+
         private void SalvarRegistro_Click(object sender, EventArgs e)
         {
             if (editar)
@@ -30,25 +30,27 @@ namespace Crud_Basico
                     textoDataNascimento.Text,
                      textoDataCriacao.Text);
 
-                ListaUsuario.AlterarRegistro(usuario);
+                UsuarioOperacoes.AlterarRegistro(usuario);
             }
             else
             {
                 var usuario = new Usuario(
-                    ListaUsuario.ContadorDeIncide(), 
+                    UsuarioAcoes.ContadorDeIncide(), 
                     textoNome.Text, textoSenha.Text, 
                     textoEmail.Text, 
                     textoDataNascimento.Text,
                     DateTime.Now.ToString("dd-MM-yyyy"));
-                ListaUsuario.SalvarRegistro(usuario);
+                UsuarioOperacoes.SalvarRegistro(usuario);
             }
 
             this.Close();
         }
+
         private void CancelarOperacao_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
         private void CarregarDados(Usuario usuario)
         {
             textoId.Text = usuario.Id.ToString();

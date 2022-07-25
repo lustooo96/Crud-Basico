@@ -3,10 +3,10 @@ namespace Crud_Basico.Model
 {
     public class Usuario
     {
-
         public Usuario() 
         { 
         }
+
         public int Id { get; set; }
         public string? Nome { get; set; }
         public string? Senha { get; set; }
@@ -16,7 +16,6 @@ namespace Crud_Basico.Model
 
         public Usuario(int id, string nome, string senha, string email, string dataNascimento, string dataCriacao)
         {
-
             this.Id = id;
             this.Nome = nome;
             this.Senha = senha;
@@ -24,7 +23,5 @@ namespace Crud_Basico.Model
             this.DataNascimento = dataNascimento;
             this.DataCriacao = dataCriacao;
         }
-        
-
     }
 }
