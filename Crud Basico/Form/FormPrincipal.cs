@@ -27,7 +27,7 @@ namespace Crud_Basico
 
         private Usuario ObterUsuarioSelecionado()
         {
-            if (dataGridView1.SelectedCells.Count == 0) throw new Exception("Selecione um usuário");
+            if (dataGridView1.SelectedCells.Count == decimal.Zero) throw new Exception("Selecione um usuário");
             var linhaSelecionada = dataGridView1.CurrentCell.RowIndex;
             return dataGridView1.Rows[linhaSelecionada].DataBoundItem as Usuario;
         }
