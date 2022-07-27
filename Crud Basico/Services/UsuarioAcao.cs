@@ -7,27 +7,17 @@ using System.Threading.Tasks;
 
 namespace Crud_Basico.Services
 {
-    class UsuarioAcao : ListaUsuario
+    public class UsuarioAcao : ListaUsuario
     {
         private static int IdUsuario = 0;
-        public static int ContadorDeIncide()
+        public static int ContadorDeIndice()
         {
             IdUsuario += 1;
             return IdUsuario;
         }
-        public static int QuantidadeUsuarios() 
+        public static int ContarUsuarios() 
         {
             return ListaUsuarios.Count;
-        }
-
-        public static bool BuscarEmailRepetido(string email)
-        {
-            foreach (Usuario listaUsuario in ListaUsuarios)
-            {
-                if (listaUsuario.Email!.ToLower() == email) return false;
-            }
-
-            return true;
         }
     }
 }

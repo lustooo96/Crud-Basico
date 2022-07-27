@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textoDataNascimento = new System.Windows.Forms.DateTimePicker();
+            this.textoDataNascimento = new System.Windows.Forms.MaskedTextBox();
             this.textoDataCriacao = new System.Windows.Forms.MaskedTextBox();
             this.labelDataCriacao = new System.Windows.Forms.Label();
             this.textoSenha = new System.Windows.Forms.TextBox();
@@ -79,24 +79,22 @@
             // 
             // textoDataNascimento
             // 
-            this.textoDataNascimento.Checked = false;
-            this.textoDataNascimento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.textoDataNascimento.Location = new System.Drawing.Point(129, 213);
+            this.textoDataNascimento.Mask = "00/00/0000";
             this.textoDataNascimento.Name = "textoDataNascimento";
             this.textoDataNascimento.Size = new System.Drawing.Size(91, 23);
-            this.textoDataNascimento.TabIndex = 3;
-            this.textoDataNascimento.ValueChanged += new System.EventHandler(this.textoDataNascimento_ValueChanged);
+            this.textoDataNascimento.TabIndex = 5;
+            this.textoDataNascimento.ValidatingType = typeof(System.DateTime);
+            this.textoDataNascimento.TextChanged += new System.EventHandler(this.TextoDataNascimento_TextChanged);
             // 
             // textoDataCriacao
             // 
-            this.textoDataCriacao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textoDataCriacao.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
-            this.textoDataCriacao.Location = new System.Drawing.Point(129, 258);
+            this.textoDataCriacao.Location = new System.Drawing.Point(129, 261);
             this.textoDataCriacao.Mask = "00/00/0000";
             this.textoDataCriacao.Name = "textoDataCriacao";
             this.textoDataCriacao.ReadOnly = true;
-            this.textoDataCriacao.Size = new System.Drawing.Size(68, 23);
-            this.textoDataCriacao.TabIndex = 4;
+            this.textoDataCriacao.Size = new System.Drawing.Size(91, 23);
+            this.textoDataCriacao.TabIndex = 6;
             this.textoDataCriacao.ValidatingType = typeof(System.DateTime);
             this.textoDataCriacao.Visible = false;
             // 
@@ -104,7 +102,7 @@
             // 
             this.labelDataCriacao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDataCriacao.AutoSize = true;
-            this.labelDataCriacao.Location = new System.Drawing.Point(36, 261);
+            this.labelDataCriacao.Location = new System.Drawing.Point(36, 269);
             this.labelDataCriacao.Name = "labelDataCriacao";
             this.labelDataCriacao.Size = new System.Drawing.Size(74, 15);
             this.labelDataCriacao.TabIndex = 19;
@@ -119,8 +117,8 @@
             this.textoSenha.Name = "textoSenha";
             this.textoSenha.PasswordChar = '*';
             this.textoSenha.Size = new System.Drawing.Size(246, 23);
-            this.textoSenha.TabIndex = 1;
-            this.textoSenha.TextChanged += new System.EventHandler(this.textoSenha_TextChanged);
+            this.textoSenha.TabIndex = 3;
+            this.textoSenha.TextChanged += new System.EventHandler(this.TextoSenha_TextChanged);
             // 
             // labelDataNascimento
             // 
@@ -150,8 +148,8 @@
             this.textoEmail.MaxLength = 30;
             this.textoEmail.Name = "textoEmail";
             this.textoEmail.Size = new System.Drawing.Size(246, 23);
-            this.textoEmail.TabIndex = 2;
-            this.textoEmail.TextChanged += new System.EventHandler(this.textoEmail_TextChanged);
+            this.textoEmail.TabIndex = 4;
+            this.textoEmail.TextChanged += new System.EventHandler(this.TextoEmail_TextChanged);
             // 
             // labelSenha
             // 
@@ -192,7 +190,7 @@
             this.textoId.Name = "textoId";
             this.textoId.ReadOnly = true;
             this.textoId.Size = new System.Drawing.Size(65, 23);
-            this.textoId.TabIndex = 6;
+            this.textoId.TabIndex = 1;
             this.textoId.Visible = false;
             // 
             // textoNome
@@ -202,8 +200,8 @@
             this.textoNome.MaxLength = 30;
             this.textoNome.Name = "textoNome";
             this.textoNome.Size = new System.Drawing.Size(246, 23);
-            this.textoNome.TabIndex = 0;
-            this.textoNome.TextChanged += new System.EventHandler(this.textoNome_TextChanged);
+            this.textoNome.TabIndex = 2;
+            this.textoNome.TextChanged += new System.EventHandler(this.TextoNome_TextChanged);
             // 
             // cancelOperation
             // 
@@ -217,7 +215,7 @@
             this.cancelOperation.Location = new System.Drawing.Point(242, 309);
             this.cancelOperation.Name = "cancelOperation";
             this.cancelOperation.Size = new System.Drawing.Size(75, 27);
-            this.cancelOperation.TabIndex = 6;
+            this.cancelOperation.TabIndex = 8;
             this.cancelOperation.Text = "Cancelar";
             this.cancelOperation.UseVisualStyleBackColor = false;
             this.cancelOperation.Click += new System.EventHandler(this.CancelarOperacao_Click);
@@ -235,7 +233,7 @@
             this.saveRegister.Location = new System.Drawing.Point(145, 309);
             this.saveRegister.Name = "saveRegister";
             this.saveRegister.Size = new System.Drawing.Size(75, 27);
-            this.saveRegister.TabIndex = 5;
+            this.saveRegister.TabIndex = 7;
             this.saveRegister.Text = "Salvar";
             this.saveRegister.UseVisualStyleBackColor = false;
             this.saveRegister.Click += new System.EventHandler(this.SalvarRegistro_Click);
@@ -289,7 +287,6 @@
         private TextBox textoNome;
         private Button cancelOperation;
         private Button saveRegister;
-        private MaskedTextBox textoDataCriacao;
         private Label labelDataCriacao;
         private TextBox textoSenha;
         private Label labelDataNascimento;
@@ -297,6 +294,7 @@
         private ErrorProvider erroSenha;
         private ErrorProvider erroEmail;
         private ErrorProvider erroData;
-        private DateTimePicker textoDataNascimento;
+        private MaskedTextBox textoDataCriacao;
+        private MaskedTextBox textoDataNascimento;
     }
 }

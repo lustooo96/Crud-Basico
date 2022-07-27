@@ -4,27 +4,28 @@ namespace Crud_Basico.Services
 {
     class UsuarioOperacao : ListaUsuario
     {
-        public static void SalvarRegistro(Usuario usuario)
+        public static void SalvarRegistroUsuario(Usuario usuario)
         {
+            if (usuario == null) throw new Exception("Usuario não informado");
             ListaUsuarios.Add(usuario);
         }
-        public static void AlterarRegistro(Usuario usuario)
+
+        public static void EditarRegistroUsuario(Usuario usuario)
         {
-            foreach (Usuario listaUsuario in ListaUsuarios)
-            {
-                if (listaUsuario.Id == usuario.Id)
-                {
-                    listaUsuario.Nome = usuario.Nome;
-                    listaUsuario.Senha = usuario.Senha;
-                    listaUsuario.Email = usuario.Email;
-                    listaUsuario.DataNascimento = usuario.DataNascimento;
-                    listaUsuario.DataCriacao = usuario.DataCriacao;
-                }
-            }
+            if (usuario == null) throw new Exception("Usuario não informado");
+            var indexUsuarioEditar = ListaUsuarios.FindIndex(listaUsuario => listaUsuario.Id == usuario.Id);
+            ListaUsuarios[indexUsuarioEditar] = usuario;
         }
-        public static void DeletarRegistro(int id)
+
+        public static void DeletarRegistroUsuario(int id)
         {
-            ListaUsuarios.RemoveAll(v => v.Id == id);
+            if (id == decimal.Zero) throw new Exception("O id não foi informado");
+            ListaUsuarios.RemoveAll(usuario => usuario.Id == id);
+        }
+
+        public static List<Usuario> ListarUsuarios()
+        {
+            return ListaUsuarios.ToList();
         }
     }
 }

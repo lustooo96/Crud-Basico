@@ -1,66 +1,70 @@
 ﻿using Crud_Basico.Model;
 using Crud_Basico.Services;
+using Crud_Basico.Validations;
 
 namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
-        private bool editar = false;
-        private string emailInicialEditar;
-        public FormRegistro()
-        {
-            InitializeComponent();
-            textoDataNascimento.CustomFormat = " ";
-        }
+        private bool editarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
-            CarregarDados(usuario);
-            textoDataNascimento.CustomFormat = " ";
+            if (usuario != null) CarregarDadosEditarRegistro(usuario);
         }
+
         private void SalvarRegistro_Click(object sender, EventArgs e)
         {
-            var validado = validarFormularioUsuario(textoNome.Text.Trim(), 
-                textoSenha.Text.Trim(), 
-                textoEmail.Text.Trim());
-
-            if (validado) 
+            try
             {
-                if (editar)
-                {
-                    UsuarioOperacao.AlterarRegistro(new Usuario(Convert.ToInt32(textoId.Text),
+                var formUsuarioValidado = validarFormularioUsuario(textoNome.Text,
+                    textoSenha.Text,textoEmail.Text, textoDataNascimento.Text);
+
+                if (!formUsuarioValidado) return;
+
+                DateTime? dataNascimento = textoDataNascimento.Text.Replace("/", "").Trim() != "" ?
+                        DateTime.Parse(textoDataNascimento.Text) : null;
+                var id = editarRegistro ? Convert.ToInt32(textoId.Text) : UsuarioAcao.ContadorDeIndice();
+                var dataCriacao = editarRegistro ? DateTime.Parse(textoDataCriacao.Text) : DateTime.Now;
+
+                var usuario = new Usuario(
+                        id,
                         textoNome.Text,
                         textoSenha.Text,
                         textoEmail.Text,
-                        textoDataNascimento.Text,
-                         textoDataCriacao.Text));
+                        dataNascimento,
+                        dataCriacao);
+
+                
+                if (editarRegistro)
+                {
+                    UsuarioOperacao.EditarRegistroUsuario(usuario);
                 }
                 else
                 {
-                    UsuarioOperacao.SalvarRegistro(
-                         new Usuario(UsuarioAcao.ContadorDeIncide(),
-                        textoNome.Text, textoSenha.Text,
-                        textoEmail.Text,
-                        textoDataNascimento.Text,
-                        DateTime.Now.ToString("dd-MM-yyyy")));
+                    UsuarioOperacao.SalvarRegistroUsuario(usuario);
                 }
                 this.Close();
             }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message , "Ocorreu um Erro");
+            }
         }
+
         private void CancelarOperacao_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        private void CarregarDados(Usuario usuario)
-        {
-            editar = true;
-            emailInicialEditar = usuario.Email;
 
+        private void CarregarDadosEditarRegistro(Usuario usuario)
+        {
+            editarRegistro = true;
             textoId.Text = usuario.Id.ToString();
             textoNome.Text = usuario.Nome!.ToString();
             textoSenha.Text = usuario.Senha!.ToString();
-            textoDataNascimento.Text = usuario.DataCriacao.ToString();
-            textoDataCriacao.Text = usuario.DataCriacao!.ToString();
+            textoDataNascimento.Text = usuario.DataNascimento.ToString();
+            textoDataCriacao.Text = usuario.DataCriacao.ToString();
             textoEmail.Text = usuario.Email!.ToString();
 
             textoId.Visible = true;
@@ -68,68 +72,70 @@ namespace Crud_Basico
             textoDataCriacao.Visible = true;
             labelDataCriacao.Visible = true;
         }
-        private bool validarFormularioUsuario(string nome,string senha, string email)
+        
+        private bool validarFormularioUsuario(string nome, string senha, string email, string data)
         {
-            var validarEmail = Validacao.ValidarEmail(email);
+            var validarEmail = ValidarEmail(email);
             var validarSenha = Validacao.ValidarSenha(senha);
             var validarNome = Validacao.ValidarNome(nome);
-            if (!validarSenha.validacao || 
-                (!validarEmail.validacao &&  !editar || 
-                editar && !validarEmail.validacao && emailInicialEditar.ToLower() != email.ToLower()) 
-                || !validarNome.validacao)
-            {
-                string mensagemAlerta = "";
-                if (!validarNome.validacao)
-                {
-                    if (nome == "")
-                    {
-                        textoNome.Clear();
-                    }
-                    erroNome.SetError(textoNome, validarNome.messagem);
-                    mensagemAlerta += "Campo Nome Inválido \n";
-                }
-                if (!validarSenha.validacao)
-                {
-                    if (senha == "")
-                    {
-                        textoSenha.Clear();
-                    }
-                    erroSenha.SetError(textoSenha, validarSenha.messagem);
-                    mensagemAlerta += "Campo Senha Inválido \n";
-                }
-                if (!validarEmail.validacao)
-                {
-                    if (email == "")
-                    {
-                        textoSenha.Clear();
-                    }
-                    erroEmail.SetError(textoEmail, validarEmail.messagem);
-                    mensagemAlerta += "Campo Email Inválido \n";
-                }
-              
-                MessageBox.Show(mensagemAlerta, "Cadastro não finalizado",
-                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            var validarDataNascimento = Validacao.ValidarDataNascimento(data);
+
+
+            string mensagemAlertaValidacao = String.Empty;
+            mensagemAlertaValidacao += ObterEDefinirErro(validarEmail, erroEmail, textoEmail);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarSenha, erroSenha, textoSenha);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarNome, erroNome, textoNome);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarDataNascimento, erroData, textoDataNascimento);
+            
+            
+            if (mensagemAlertaValidacao != String.Empty)
+            {   
+                MessageBox.Show(mensagemAlertaValidacao, "Cadastro não finalizado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
         }
-        private void textoEmail_TextChanged(object sender, EventArgs e)
+
+        private string ObterEDefinirErro((bool validacao, string mensagem) dadosValidacao, ErrorProvider error, Control text)
+        {
+            if (!dadosValidacao.validacao)
+            {
+                error.SetError(text, dadosValidacao.mensagem);
+                return dadosValidacao.mensagem + "\n";
+            }
+
+            return string.Empty;
+        }
+
+        private (bool validacao, string messagem) ValidarEmail(string email) 
+
+        {
+            var id = editarRegistro ? Convert.ToInt32(textoId.Text) : (int)decimal.Zero;
+            var emailPodeSerCriado = ValidacaoUsuario.EmailPodeSerCriado(email, id);
+            if (!emailPodeSerCriado.validacao)
+            {
+                return emailPodeSerCriado;
+            }
+            return Validacao.ValidarEmail(email);
+        }
+        private void TextoEmail_TextChanged(object sender, EventArgs e)
         {
             erroEmail.Clear();
         }
-        private void textoSenha_TextChanged(object sender, EventArgs e)
+        
+        private void TextoSenha_TextChanged(object sender, EventArgs e)
         {
             erroSenha.Clear();
         }
-        private void textoNome_TextChanged(object sender, EventArgs e)
+        
+        private void TextoNome_TextChanged(object sender, EventArgs e)
         {
             erroNome.Clear();
         }
-        private void textoDataNascimento_ValueChanged(object sender, EventArgs e)
+        
+        private void TextoDataNascimento_TextChanged(object sender, EventArgs e)
         {
-            textoDataNascimento.CustomFormat = "dd/MM/yyyy";
-            textoDataNascimento.MinDate = new DateTime(1920, 1, 01);
-            textoDataNascimento.MaxDate = DateTime.Today;
+            erroData.Clear();
         }
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Crud_Basico.Services
 {
-    class ListaUsuario
+    public class ListaUsuario
     {
         protected static List<Usuario> ListaUsuarios = new List<Usuario>();
+
     }
 }
