@@ -1,31 +1,31 @@
-﻿using Crud_Basico.Model;
+﻿using Crud_Basico.Modelo;
 
-namespace Crud_Basico.Services
+namespace Crud_Basico.Serviços
 {
     class UsuarioOperacao
     {
         public static void SalvarRegistroUsuario(Usuario usuario)
         {
-            if (usuario == null) throw new Exception("Usuario não informado");
-            ListaUsuario.ObterInstanciaListaUsuario.Add(usuario);
+            if (usuario == null) throw new Exception("Usuario não foi informado");
+            ListaUsuario.ObterInstanciaDaListaUsuario.Add(usuario);
         }
 
         public static void EditarRegistroUsuario(Usuario usuario)
         {
-            if (usuario == null) throw new Exception("Usuario não informado");
-            var indexUsuarioEditar = ListaUsuario.ObterInstanciaListaUsuario.FindIndex(listaUsuario => listaUsuario.Id == usuario.Id);
-            ListaUsuario.ObterInstanciaListaUsuario[indexUsuarioEditar] = usuario;
+            if (usuario == null) throw new Exception("Usuario não foi informado");
+            var posicaoUsuarioEditar = ListaUsuario.ObterInstanciaDaListaUsuario.FindIndex(listaUsuario => listaUsuario.Id == usuario.Id);
+            ListaUsuario.ObterInstanciaDaListaUsuario[posicaoUsuarioEditar] = usuario;
         }
 
         public static void DeletarRegistroUsuario(int id)
         {
             if (id == decimal.Zero) throw new Exception("O id não foi informado");
-            ListaUsuario.ObterInstanciaListaUsuario.RemoveAll(usuario => usuario.Id == id);
+            ListaUsuario.ObterInstanciaDaListaUsuario.RemoveAll(usuario => usuario.Id == id);
         }
 
         public static List<Usuario> ListarUsuarios()
         {
-            return ListaUsuario.ObterInstanciaListaUsuario.ToList();
+            return ListaUsuario.ObterInstanciaDaListaUsuario.ToList();
         }
     }
 }

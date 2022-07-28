@@ -1,5 +1,5 @@
-using Crud_Basico.Model;
-using Crud_Basico.Services;
+using Crud_Basico.Modelo;
+using Crud_Basico.Serviços;
 
 namespace Crud_Basico
 {
@@ -10,17 +10,26 @@ namespace Crud_Basico
             InitializeComponent();
         }
 
-        private void DeletarRegistro_Click(object sender, EventArgs e)
+        private void DeletarRegistro_Clicar(object sender, EventArgs e)
         {
             try
             {
-                var usuarioSelecionado = ObterUsuarioSelecionado(); 
-                UsuarioOperacao.DeletarRegistroUsuario(usuarioSelecionado.Id);
-                dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+
+                var usuarioSelecionado = ObterUsuarioSelecionado();
+                string mensagemDeletarUsuario = "Você realmente deseja deletar esse usuário ?";
+                string TituloDaMensagem = "Deletar Usuário";
+
+                DialogResult resultadoAlertaDeDeletar = MessageBox.Show(mensagemDeletarUsuario, TituloDaMensagem,
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (resultadoAlertaDeDeletar == DialogResult.Yes)
+                {
+                    UsuarioOperacao.DeletarRegistroUsuario(usuarioSelecionado.Id);
+                    dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+                }
             }
-            catch (Exception error)
+            catch (Exception erro)
             {
-                MessageBox.Show(error.Message, "Ocorreu um Erro");
+                MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
 
         }
@@ -32,22 +41,22 @@ namespace Crud_Basico
             return dataGridView1.Rows[linhaSelecionada].DataBoundItem as Usuario;
         }
 
-        private void EditarRegistro_Click(object sender, EventArgs e)
+        private void EditarRegistro_Clicar(object sender, EventArgs e)
         {
             try
             { 
                 var usuarioSelecionado = ObterUsuarioSelecionado();
-                var registerScreen = new FormRegistro(usuarioSelecionado);
+                var telaRegistro = new FormRegistro(usuarioSelecionado);
 
-                registerScreen.ShowDialog();
+                telaRegistro.ShowDialog();
             }
-            catch (Exception error)
+            catch (Exception erro)
             {
-                MessageBox.Show(error.Message, "Ocorreu um Erro");
+                MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
         }
 
-        private void NovoRegistro_Click(object sender, EventArgs e)
+        private void NovoRegistro_Clicar(object sender, EventArgs e)
         {
             try
             {
@@ -60,21 +69,21 @@ namespace Crud_Basico
             }
         }
 
-        private void FecharTela_Click(object sender, EventArgs e)
+        private void FecharTela_Clicar(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void FormPrincipal_Activated(object sender, EventArgs e)
+        private void FormPrincipal_Ativado(object sender, EventArgs e)
         {
             try
             {
                 dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
-            catch (Exception error)
+            catch (Exception erro) 
             {
-                MessageBox.Show(error.Message, "Ocorreu um Erro");
+                MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
 
         }

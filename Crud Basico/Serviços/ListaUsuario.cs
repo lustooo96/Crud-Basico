@@ -1,14 +1,18 @@
-﻿using Crud_Basico.Model;
+﻿using Crud_Basico.Modelo;
 
-namespace Crud_Basico.Services
+namespace Crud_Basico.Serviços
 {
-     public class ListaUsuario
-     {
+    public sealed class ListaUsuario 
+    {
         private static object ObjetoFechado = new object();
         private static List<Usuario>? ListaUsuarios;
         private static int IdUsuario = 0;
 
-        public static List<Usuario> ObterInstanciaListaUsuario
+        private ListaUsuario() 
+        { 
+        }
+           
+        public static List<Usuario> ObterInstanciaDaListaUsuario
         {
             get
             {
@@ -22,9 +26,9 @@ namespace Crud_Basico.Services
                 return ListaUsuarios;
             }
         }
-        public static int ContadorDeIndice()
+        public static int ReceberNumeroDoIdUsuario()
         {
-            IdUsuario += 1;
+            IdUsuario++;
             return IdUsuario;
         }
     }

@@ -78,7 +78,7 @@
             this.fecharTela.TabIndex = 5;
             this.fecharTela.Text = "Sair";
             this.fecharTela.UseVisualStyleBackColor = false;
-            this.fecharTela.Click += new System.EventHandler(this.FecharTela_Click);
+            this.fecharTela.Click += new System.EventHandler(this.FecharTela_Clicar);
             // 
             // dataGridView1
             // 
@@ -109,7 +109,7 @@
             this.editarRegistro.TabIndex = 1;
             this.editarRegistro.Text = "Editar";
             this.editarRegistro.UseVisualStyleBackColor = false;
-            this.editarRegistro.Click += new System.EventHandler(this.EditarRegistro_Click);
+            this.editarRegistro.Click += new System.EventHandler(this.EditarRegistro_Clicar);
             // 
             // novoRegistro
             // 
@@ -128,7 +128,7 @@
             this.novoRegistro.TabIndex = 4;
             this.novoRegistro.Text = "Novo";
             this.novoRegistro.UseVisualStyleBackColor = false;
-            this.novoRegistro.Click += new System.EventHandler(this.NovoRegistro_Click);
+            this.novoRegistro.Click += new System.EventHandler(this.NovoRegistro_Clicar);
             // 
             // DeletarRegistro
             // 
@@ -147,7 +147,7 @@
             this.DeletarRegistro.TabIndex = 2;
             this.DeletarRegistro.Text = "Deletar";
             this.DeletarRegistro.UseVisualStyleBackColor = false;
-            this.DeletarRegistro.Click += new System.EventHandler(this.DeletarRegistro_Click);
+            this.DeletarRegistro.Click += new System.EventHandler(this.DeletarRegistro_Clicar);
             // 
             // FormPrincipal
             // 
@@ -159,7 +159,7 @@
             this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Usuário";
-            this.Activated += new System.EventHandler(this.FormPrincipal_Activated);
+            this.Activated += new System.EventHandler(this.FormPrincipal_Ativado);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

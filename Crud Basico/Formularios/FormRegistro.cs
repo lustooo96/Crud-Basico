@@ -1,42 +1,42 @@
-﻿using Crud_Basico.Model;
-using Crud_Basico.Services;
-using Crud_Basico.Validations;
+﻿using Crud_Basico.Modelo;
+using Crud_Basico.Serviços;
+using Crud_Basico.Validação;
 
 namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
-        private bool editarRegistro = false;
+        private bool EditarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
-            if (usuario != null) CarregarDadosEditarRegistro(usuario);
+            if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
         }
 
-        private void SalvarRegistro_Click(object sender, EventArgs e)
+        private void SalvarRegistro_Clicar(object sender, EventArgs e)
         {
             try
             {
-                var formUsuarioValidado = validarFormularioUsuario(textoNome.Text,
-                    textoSenha.Text,textoEmail.Text, textoDataNascimento.Text);
+                var formUsuarioValidado = ValidarFormularioUsuario(campoEntradaNome.Text,
+                    campoEntradaSenha.Text,campoEntradaEmail.Text, campoEntradaDataNascimento.Text);
 
                 if (!formUsuarioValidado) return;
 
-                DateTime? dataNascimento = textoDataNascimento.Text.Replace("/", "").Trim() != "" ?
-                        DateTime.Parse(textoDataNascimento.Text) : null;
-                var id = editarRegistro ? Convert.ToInt32(textoId.Text) : ListaUsuario.ContadorDeIndice();
-                var dataCriacao = editarRegistro ? DateTime.Parse(textoDataCriacao.Text) : DateTime.Now;
+                DateTime? dataNascimento = campoEntradaDataNascimento.Text.Replace("/", "").Trim() != "" ?
+                        DateTime.Parse(campoEntradaDataNascimento.Text) : null;
+                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : ListaUsuario.ReceberNumeroDoIdUsuario();
+                var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
 
                 var usuario = new Usuario(
                         id,
-                        textoNome.Text,
-                        textoSenha.Text,
-                        textoEmail.Text,
+                        campoEntradaNome.Text,
+                        campoEntradaSenha.Text,
+                        campoEntradaEmail.Text,
                         dataNascimento,
                         dataCriacao);
 
                 
-                if (editarRegistro)
+                if (EditarRegistro)
                 {
                     UsuarioOperacao.EditarRegistroUsuario(usuario);
                 }
@@ -46,34 +46,34 @@ namespace Crud_Basico
                 }
                 this.Close();
             }
-            catch (Exception error)
+            catch (Exception erro) 
             {
-                MessageBox.Show(error.Message , "Ocorreu um Erro");
+                MessageBox.Show(erro.Message , "Ocorreu um Erro");
             }
         }
 
-        private void CancelarOperacao_Click(object sender, EventArgs e)
+        private void CancelarOperacao_Clicar(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void CarregarDadosEditarRegistro(Usuario usuario)
+        private void CarregarDadosParaEditarRegistro(Usuario usuario)
         {
-            editarRegistro = true;
-            textoId.Text = usuario.Id.ToString();
-            textoNome.Text = usuario.Nome!.ToString();
-            textoSenha.Text = usuario.Senha!.ToString();
-            textoDataNascimento.Text = usuario.DataNascimento.ToString();
-            textoDataCriacao.Text = usuario.DataCriacao.ToString();
-            textoEmail.Text = usuario.Email!.ToString();
+            EditarRegistro = true;
+            campoEntradaId.Text = usuario.Id.ToString();
+            campoEntradaNome.Text = usuario.Nome!.ToString();
+            campoEntradaSenha.Text = usuario.Senha!.ToString();
+            campoEntradaDataNascimento.Text = usuario.DataNascimento.ToString();
+            campoEntradaDataCriacao.Text = usuario.DataCriacao.ToString();
+            campoEntradaEmail.Text = usuario.Email!.ToString();
 
-            textoId.Visible = true;
+            campoEntradaId.Visible = true;
             labelId.Visible = true;
-            textoDataCriacao.Visible = true;
+            campoEntradaDataCriacao.Visible = true;
             labelDataCriacao.Visible = true;
         }
         
-        private bool validarFormularioUsuario(string nome, string senha, string email, string data)
+        private bool ValidarFormularioUsuario(string nome, string senha, string email, string data)
         {
             var validarEmail = ValidarEmail(email);
             var validarSenha = Validacao.ValidarSenha(senha);
@@ -82,10 +82,10 @@ namespace Crud_Basico
 
 
             string mensagemAlertaValidacao = String.Empty;
-            mensagemAlertaValidacao += ObterEDefinirErro(validarEmail, erroEmail, textoEmail);
-            mensagemAlertaValidacao += ObterEDefinirErro(validarSenha, erroSenha, textoSenha);
-            mensagemAlertaValidacao += ObterEDefinirErro(validarNome, erroNome, textoNome);
-            mensagemAlertaValidacao += ObterEDefinirErro(validarDataNascimento, erroData, textoDataNascimento);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarEmail, erroEmail, campoEntradaEmail);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarSenha, erroSenha, campoEntradaSenha);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarNome, erroNome, campoEntradaNome);
+            mensagemAlertaValidacao += ObterEDefinirErro(validarDataNascimento, erroData, campoEntradaDataNascimento);
             
             
             if (mensagemAlertaValidacao != String.Empty)
@@ -110,7 +110,7 @@ namespace Crud_Basico
         private (bool validacao, string messagem) ValidarEmail(string email) 
 
         {
-            var id = editarRegistro ? Convert.ToInt32(textoId.Text) : (int)decimal.Zero;
+            var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
             var emailPodeSerCriado = ValidacaoUsuario.EmailPodeSerCriado(email, id);
             if (!emailPodeSerCriado.validacao)
             {
@@ -119,22 +119,22 @@ namespace Crud_Basico
             return Validacao.ValidarEmail(email);
         }
 
-        private void TextoEmail_TextChanged(object sender, EventArgs e)
+        private void CampoDeEntradaEmail_TextoMudar(object sender, EventArgs e)
         {
             erroEmail.Clear();
         }
         
-        private void TextoSenha_TextChanged(object sender, EventArgs e)
+        private void CampoDeEntradaSenha_TextoMudar(object sender, EventArgs e)
         {
             erroSenha.Clear();
         }
         
-        private void TextoNome_TextChanged(object sender, EventArgs e)
+        private void CampoDeEntradaNome_TextoMudar(object sender, EventArgs e)
         {
             erroNome.Clear();
         }
         
-        private void TextoDataNascimento_TextChanged(object sender, EventArgs e)
+        private void CampoDeEntradaDataNascimento_TextoMudar(object sender, EventArgs e)
         {
             erroData.Clear();
         }
