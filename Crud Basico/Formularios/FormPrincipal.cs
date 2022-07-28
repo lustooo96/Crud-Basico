@@ -51,12 +51,12 @@ namespace Crud_Basico
         {
             try
             {
-                var registerScreen = new FormRegistro(null);
-                registerScreen.ShowDialog();
+                var telaRegistro = new FormRegistro(null);
+                telaRegistro.ShowDialog();
             }
-            catch (Exception error)
+            catch (Exception erro)
             {
-                MessageBox.Show(error.Message, "Ocorreu um Erro");
+                MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
         }
 

@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace Crud_Basico.Services
 {
-    public class UsuarioAcao : ListaUsuario
+    public class UsuarioAcao
     {
-        private static int IdUsuario = 0;
-        public static int ContadorDeIndice()
-        {
-            IdUsuario += 1;
-            return IdUsuario;
-        }
+        
         public static int ContarUsuarios() 
         {
-            return ListaUsuarios.Count;
+            return ListaUsuario.ObterInstanciaListaUsuario.Count;
         }
     }
 }

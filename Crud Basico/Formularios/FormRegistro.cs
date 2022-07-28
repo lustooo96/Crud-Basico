@@ -24,7 +24,7 @@ namespace Crud_Basico
 
                 DateTime? dataNascimento = textoDataNascimento.Text.Replace("/", "").Trim() != "" ?
                         DateTime.Parse(textoDataNascimento.Text) : null;
-                var id = editarRegistro ? Convert.ToInt32(textoId.Text) : UsuarioAcao.ContadorDeIndice();
+                var id = editarRegistro ? Convert.ToInt32(textoId.Text) : ListaUsuario.ContadorDeIndice();
                 var dataCriacao = editarRegistro ? DateTime.Parse(textoDataCriacao.Text) : DateTime.Now;
 
                 var usuario = new Usuario(
@@ -118,6 +118,7 @@ namespace Crud_Basico
             }
             return Validacao.ValidarEmail(email);
         }
+
         private void TextoEmail_TextChanged(object sender, EventArgs e)
         {
             erroEmail.Clear();

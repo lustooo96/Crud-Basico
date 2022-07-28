@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Crud_Basico.Validations
 {
-    public class ValidacaoUsuario : ListaUsuario
+    public class ValidacaoUsuario
     {
         public static (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
         {
-            var resultadoUsuario = ListaUsuarios.FirstOrDefault(
+            var resultadoUsuario = ListaUsuario.ObterInstanciaListaUsuario.FirstOrDefault(
                 usuario => usuario.Email.ToLower().Contains(email.ToLower()));
 
             if (resultadoUsuario == null || resultadoUsuario.Id == id)
