@@ -1,17 +1,12 @@
-﻿using Crud_Basico.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Crud_Basico.Servicos;
 
-namespace Crud_Basico.Validations
+namespace Crud_Basico.Validacoes
 {
-    public class ValidacaoUsuario : ListaUsuario
+    public class ValidacaoUsuario
     {
         public static (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
         {
-            var resultadoUsuario = ListaUsuarios.FirstOrDefault(
+            var resultadoUsuario = ListaUsuario.ObterInstanciaDaListaUsuario.FirstOrDefault(
                 usuario => usuario.Email.ToLower().Contains(email.ToLower()));
 
             if (resultadoUsuario == null || resultadoUsuario.Id == id)

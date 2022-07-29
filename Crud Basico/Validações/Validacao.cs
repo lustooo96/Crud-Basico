@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Crud_Basico.Validations
+namespace Crud_Basico.Validação
 {
     class Validacao
     {
@@ -26,12 +26,12 @@ namespace Crud_Basico.Validations
             return (true, "");
         }
 
-        public static (bool validacao, string mensagem) ValidarDataNascimento(string data)
+        public static (bool validacao, string mensagem) ValidarDataNascimento(string dataNascimento)
         {
-            if (data.Replace("/", "").Trim().Length != decimal.Zero)
+            if (dataNascimento.Replace("/", "").Trim().Length != decimal.Zero)
             {
-                if (!ValidarData(data)) return (false, "Digite uma data válida");
-                else if (DateTime.Parse(data) > DateTime.Today || DateTime.Parse(data) < new DateTime(1930, 12, 30))
+                if (!ValidarData(dataNascimento)) return (false, "Digite uma data válida");
+                else if (DateTime.Parse(dataNascimento) > DateTime.Today || DateTime.Parse(dataNascimento) < new DateTime(1930, 12, 30))
                     return (false, "Digite uma data Válida");
             }
             return (true, "");
