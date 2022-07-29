@@ -1,5 +1,5 @@
 using Crud_Basico.Modelo;
-using Crud_Basico.Serviços;
+using Crud_Basico.Servicos;
 
 namespace Crud_Basico
 {

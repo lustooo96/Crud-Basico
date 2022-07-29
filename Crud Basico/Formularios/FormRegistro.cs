@@ -1,6 +1,6 @@
 ﻿using Crud_Basico.Modelo;
-using Crud_Basico.Serviços;
-using Crud_Basico.Validação;
+using Crud_Basico.Servicos;
+using Crud_Basico.Validacoes;
 
 namespace Crud_Basico
 {
