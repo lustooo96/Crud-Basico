@@ -6,11 +6,13 @@ namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
+        UsuarioOperacao OperacaoDoUsuario;
         private bool EditarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
+            OperacaoDoUsuario = new UsuarioOperacao();
         }
 
         private void SalvarRegistro_Clicar(object sender, EventArgs e)
@@ -38,11 +40,11 @@ namespace Crud_Basico
                 
                 if (EditarRegistro)
                 {
-                    UsuarioOperacao.EditarRegistroUsuario(usuario);
+                    OperacaoDoUsuario.EditarRegistroUsuario(usuario);
                 }
                 else
                 {
-                    UsuarioOperacao.SalvarRegistroUsuario(usuario);
+                    OperacaoDoUsuario.SalvarRegistroUsuario(usuario);
                 }
                 this.Close();
             }

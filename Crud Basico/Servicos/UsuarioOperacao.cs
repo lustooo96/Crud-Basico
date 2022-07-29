@@ -1,31 +1,36 @@
 ﻿using Crud_Basico.Modelo;
+using Crud_Basico.Repositorio;
 
 namespace Crud_Basico.Servicos
 {
-    class UsuarioOperacao
+    class UsuarioOperacao : IUsuarioRepositorio
     {
-        public static void SalvarRegistroUsuario(Usuario usuario)
+        public UsuarioOperacao() 
+        { 
+        }
+        public void SalvarRegistroUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("Usuario não foi informado");
             ListaUsuario.ObterInstanciaDaListaUsuario.Add(usuario);
         }
 
-        public static void EditarRegistroUsuario(Usuario usuario)
+        public void EditarRegistroUsuario(Usuario usuario)
         {
             if (usuario == null) throw new Exception("Usuario não foi informado");
             var posicaoUsuarioEditar = ListaUsuario.ObterInstanciaDaListaUsuario.FindIndex(listaUsuario => listaUsuario.Id == usuario.Id);
             ListaUsuario.ObterInstanciaDaListaUsuario[posicaoUsuarioEditar] = usuario;
         }
 
-        public static void DeletarRegistroUsuario(int id)
+        public void DeletarRegistroUsuario(int id)
         {
             if (id == decimal.Zero) throw new Exception("O id não foi informado");
             ListaUsuario.ObterInstanciaDaListaUsuario.RemoveAll(usuario => usuario.Id == id);
         }
 
-        public static List<Usuario> ListarUsuarios()
+        public List<Usuario> ListarUsuarios()
         {
             return ListaUsuario.ObterInstanciaDaListaUsuario.ToList();
         }
+       
     }
 }

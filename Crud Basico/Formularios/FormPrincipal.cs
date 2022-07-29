@@ -5,9 +5,11 @@ namespace Crud_Basico
 {
     public partial class FormPrincipal : Form
     {
+        UsuarioOperacao OperacaoDoUsuario;
         public FormPrincipal()
         {
             InitializeComponent();
+            OperacaoDoUsuario = new UsuarioOperacao();
         }
 
         private void DeletarRegistro_Clicar(object sender, EventArgs e)
@@ -23,8 +25,8 @@ namespace Crud_Basico
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (resultadoAlertaDeDeletar == DialogResult.Yes)
                 {
-                    UsuarioOperacao.DeletarRegistroUsuario(usuarioSelecionado.Id);
-                    dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+                    OperacaoDoUsuario.DeletarRegistroUsuario(usuarioSelecionado.Id);
+                    dataGridView1.DataSource = OperacaoDoUsuario.ListarUsuarios();
                 }
             }
             catch (Exception erro)
@@ -78,7 +80,7 @@ namespace Crud_Basico
         {
             try
             {
-                dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+                dataGridView1.DataSource = OperacaoDoUsuario.ListarUsuarios();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
             catch (Exception erro) 
