@@ -25,8 +25,8 @@ namespace Crud_Basico
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (resultadoAlertaDeDeletar == DialogResult.Yes)
                 {
-                    OperacaoDoUsuario.DeletarRegistroUsuario(usuarioSelecionado.Id);
-                    dataGridView1.DataSource = OperacaoDoUsuario.ListarUsuarios();
+                    OperacaoDoUsuario.Remover(usuarioSelecionado.Id);
+                    dataGridView1.DataSource = OperacaoDoUsuario.Listar();
                 }
             }
             catch (Exception erro)
@@ -80,7 +80,7 @@ namespace Crud_Basico
         {
             try
             {
-                dataGridView1.DataSource = OperacaoDoUsuario.ListarUsuarios();
+                dataGridView1.DataSource = OperacaoDoUsuario.Listar();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
             catch (Exception erro) 

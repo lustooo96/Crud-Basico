@@ -26,7 +26,7 @@ namespace Crud_Basico
 
                 DateTime? dataNascimento = campoEntradaDataNascimento.Text.Replace("/", "").Trim() != "" ?
                         DateTime.Parse(campoEntradaDataNascimento.Text) : null;
-                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : ListaUsuario.ReceberNumeroDoIdUsuario();
+                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : ListaUsuario<Usuario>.ReceberNumeroDoIdUsuario();
                 var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
 
                 var usuario = new Usuario(
@@ -40,11 +40,11 @@ namespace Crud_Basico
                 
                 if (EditarRegistro)
                 {
-                    OperacaoDoUsuario.EditarRegistroUsuario(usuario);
+                    OperacaoDoUsuario.Atualizar(usuario);
                 }
                 else
                 {
-                    OperacaoDoUsuario.SalvarRegistroUsuario(usuario);
+                    OperacaoDoUsuario.Salvar(usuario);
                 }
                 this.Close();
             }

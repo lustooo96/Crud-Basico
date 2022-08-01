@@ -2,17 +2,17 @@
 
 namespace Crud_Basico.Servicos
 {
-    public sealed class ListaUsuario 
+    public sealed class ListaUsuario<T>
     {
         private static object ObjetoFechado = new object();
-        private static List<Usuario>? ListaUsuarios;
+        private static List<T>? ListaUsuarios;
         private static int IdUsuario = 0;
 
         private ListaUsuario() 
         { 
         }
            
-        public static List<Usuario> ObterInstanciaDaListaUsuario
+        public static List<T> ObterInstanciaDaListaUsuario
         {
             get
             {
@@ -20,7 +20,7 @@ namespace Crud_Basico.Servicos
                 {
                     lock (ObjetoFechado)
                     {
-                        if (ListaUsuarios == null) ListaUsuarios = new List<Usuario>();
+                        if (ListaUsuarios == null) ListaUsuarios = new List<T>();
                     }
                 }
                 return ListaUsuarios;
