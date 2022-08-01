@@ -1,9 +1,9 @@
 ﻿using Crud_Basico.Modelo;
-using Crud_Basico.Repositorio;
+using Crud_Basico.Repositorios;
 
 namespace Crud_Basico.Servicos
 {
-    class UsuarioOperacao : IUsuarioRepositorio
+    class UsuarioOperacao : IUsuarioRepositorio<Usuario>
     {
         public UsuarioOperacao() 
         { 
