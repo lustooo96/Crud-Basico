@@ -1,20 +1,21 @@
 using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+using Crud_Basico.Repositorios;
 
 namespace Crud_Basico
 {
     public partial class FormPrincipal : Form
     {
+        RepositorioUsuario OperacaoDoUsuario;
         public FormPrincipal()
         {
             InitializeComponent();
+            OperacaoDoUsuario = new RepositorioUsuario();
         }
 
-        private void DeletarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmDeletarRegistro(object sender, EventArgs e)
         {
             try
             {
-
                 var usuarioSelecionado = ObterUsuarioSelecionado();
                 string mensagemDeletarUsuario = "Você realmente deseja deletar esse usuário ?";
                 string TituloDaMensagem = "Deletar Usuário";
@@ -23,8 +24,8 @@ namespace Crud_Basico
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (resultadoAlertaDeDeletar == DialogResult.Yes)
                 {
-                    UsuarioOperacao.DeletarRegistroUsuario(usuarioSelecionado.Id);
-                    dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+                    OperacaoDoUsuario.Remover(usuarioSelecionado.Id);
+                    dataGridView1.DataSource = OperacaoDoUsuario.Listar();
                 }
             }
             catch (Exception erro)
@@ -41,7 +42,7 @@ namespace Crud_Basico
             return dataGridView1.Rows[linhaSelecionada].DataBoundItem as Usuario;
         }
 
-        private void EditarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmEditarRegistro(object sender, EventArgs e)
         {
             try
             { 
@@ -56,7 +57,7 @@ namespace Crud_Basico
             }
         }
 
-        private void NovoRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmNovoRegistro(object sender, EventArgs e)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace Crud_Basico
             }
         }
 
-        private void FecharTela_Clicar(object sender, EventArgs e)
+        private void AoClicarEmFecharTela(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -78,7 +79,7 @@ namespace Crud_Basico
         {
             try
             {
-                dataGridView1.DataSource = UsuarioOperacao.ListarUsuarios();
+                dataGridView1.DataSource = OperacaoDoUsuario.Listar();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
             catch (Exception erro) 

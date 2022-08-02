@@ -85,7 +85,7 @@
             this.campoEntradaDataNascimento.Size = new System.Drawing.Size(91, 23);
             this.campoEntradaDataNascimento.TabIndex = 5;
             this.campoEntradaDataNascimento.ValidatingType = typeof(System.DateTime);
-            this.campoEntradaDataNascimento.TextChanged += new System.EventHandler(this.CampoDeEntradaDataNascimento_TextoMudar);
+            this.campoEntradaDataNascimento.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaDataNascimentoMudar);
             // 
             // campoEntradaDataCriacao
             // 
@@ -118,7 +118,7 @@
             this.campoEntradaSenha.PasswordChar = '*';
             this.campoEntradaSenha.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaSenha.TabIndex = 3;
-            this.campoEntradaSenha.TextChanged += new System.EventHandler(this.CampoDeEntradaSenha_TextoMudar);
+            this.campoEntradaSenha.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaSenhaMudar);
             // 
             // labelDataNascimento
             // 
@@ -149,7 +149,7 @@
             this.campoEntradaEmail.Name = "campoEntradaEmail";
             this.campoEntradaEmail.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaEmail.TabIndex = 4;
-            this.campoEntradaEmail.TextChanged += new System.EventHandler(this.CampoDeEntradaEmail_TextoMudar);
+            this.campoEntradaEmail.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaEmailMudar);
             // 
             // labelSenha
             // 
@@ -201,7 +201,7 @@
             this.campoEntradaNome.Name = "campoEntradaNome";
             this.campoEntradaNome.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaNome.TabIndex = 2;
-            this.campoEntradaNome.TextChanged += new System.EventHandler(this.CampoDeEntradaEmail_TextoMudar);
+            this.campoEntradaNome.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaEmailMudar);
             // 
             // cancelarOperacao
             // 
@@ -218,7 +218,7 @@
             this.cancelarOperacao.TabIndex = 8;
             this.cancelarOperacao.Text = "Cancelar";
             this.cancelarOperacao.UseVisualStyleBackColor = false;
-            this.cancelarOperacao.Click += new System.EventHandler(this.CancelarOperacao_Clicar);
+            this.cancelarOperacao.Click += new System.EventHandler(this.AoClicarEmCancelarOperacao);
             // 
             // salvarRegistro
             // 
@@ -236,7 +236,7 @@
             this.salvarRegistro.TabIndex = 7;
             this.salvarRegistro.Text = "Salvar";
             this.salvarRegistro.UseVisualStyleBackColor = false;
-            this.salvarRegistro.Click += new System.EventHandler(this.SalvarRegistro_Clicar);
+            this.salvarRegistro.Click += new System.EventHandler(this.AoClicarEmSalvarRegistro);
             // 
             // erroNome
             // 

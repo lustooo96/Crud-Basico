@@ -1,4 +1,5 @@
 ﻿using Crud_Basico.Modelo;
+using Crud_Basico.Repositorios;
 using Crud_Basico.Servicos;
 using Crud_Basico.Validacoes;
 
@@ -6,14 +7,16 @@ namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
+        RepositorioUsuario RepositorioUsuario;
         private bool EditarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
+            RepositorioUsuario = new RepositorioUsuario();
         }
 
-        private void SalvarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
         {
             try
             {
@@ -24,7 +27,7 @@ namespace Crud_Basico
 
                 DateTime? dataNascimento = campoEntradaDataNascimento.Text.Replace("/", "").Trim() != "" ?
                         DateTime.Parse(campoEntradaDataNascimento.Text) : null;
-                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : ListaUsuario.ReceberNumeroDoIdUsuario();
+                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : Lista<Usuario>.ReceberNumeroDoId();
                 var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
 
                 var usuario = new Usuario(
@@ -38,11 +41,11 @@ namespace Crud_Basico
                 
                 if (EditarRegistro)
                 {
-                    UsuarioOperacao.EditarRegistroUsuario(usuario);
+                    RepositorioUsuario.Atualizar(usuario);
                 }
                 else
                 {
-                    UsuarioOperacao.SalvarRegistroUsuario(usuario);
+                    RepositorioUsuario.Salvar(usuario);
                 }
                 this.Close();
             }
@@ -52,7 +55,7 @@ namespace Crud_Basico
             }
         }
 
-        private void CancelarOperacao_Clicar(object sender, EventArgs e)
+        private void AoClicarEmCancelarOperacao(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -119,22 +122,22 @@ namespace Crud_Basico
             return Validacao.ValidarEmail(email);
         }
 
-        private void CampoDeEntradaEmail_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaEmailMudar(object sender, EventArgs e)
         {
             erroEmail.Clear();
         }
         
-        private void CampoDeEntradaSenha_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaSenhaMudar(object sender, EventArgs e)
         {
             erroSenha.Clear();
         }
         
-        private void CampoDeEntradaNome_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaNomeMudar(object sender, EventArgs e)
         {
             erroNome.Clear();
         }
         
-        private void CampoDeEntradaDataNascimento_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaDataNascimentoMudar(object sender, EventArgs e)
         {
             erroData.Clear();
         }
