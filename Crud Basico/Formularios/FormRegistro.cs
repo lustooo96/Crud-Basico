@@ -1,4 +1,5 @@
 ﻿using Crud_Basico.Modelo;
+using Crud_Basico.Repositorios;
 using Crud_Basico.Servicos;
 using Crud_Basico.Validacoes;
 
@@ -6,16 +7,16 @@ namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
-        UsuarioOperacao OperacaoDoUsuario;
+        RepositorioUsuario RepositorioUsuario;
         private bool EditarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
-            OperacaoDoUsuario = new UsuarioOperacao();
+            RepositorioUsuario = new RepositorioUsuario();
         }
 
-        private void SalvarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
         {
             try
             {
@@ -40,11 +41,11 @@ namespace Crud_Basico
                 
                 if (EditarRegistro)
                 {
-                    OperacaoDoUsuario.Atualizar(usuario);
+                    RepositorioUsuario.Atualizar(usuario);
                 }
                 else
                 {
-                    OperacaoDoUsuario.Salvar(usuario);
+                    RepositorioUsuario.Salvar(usuario);
                 }
                 this.Close();
             }
@@ -54,7 +55,7 @@ namespace Crud_Basico
             }
         }
 
-        private void CancelarOperacao_Clicar(object sender, EventArgs e)
+        private void AoClicarEmCancelarOperacao(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -121,22 +122,22 @@ namespace Crud_Basico
             return Validacao.ValidarEmail(email);
         }
 
-        private void CampoDeEntradaEmail_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaEmailMudar(object sender, EventArgs e)
         {
             erroEmail.Clear();
         }
         
-        private void CampoDeEntradaSenha_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaSenhaMudar(object sender, EventArgs e)
         {
             erroSenha.Clear();
         }
         
-        private void CampoDeEntradaNome_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaNomeMudar(object sender, EventArgs e)
         {
             erroNome.Clear();
         }
         
-        private void CampoDeEntradaDataNascimento_TextoMudar(object sender, EventArgs e)
+        private void QuandoCampoDeEntradaDataNascimentoMudar(object sender, EventArgs e)
         {
             erroData.Clear();
         }

@@ -1,12 +1,11 @@
 ﻿using Crud_Basico.Modelo;
-using Crud_Basico.Repositorios;
 
-namespace Crud_Basico.Servicos
+namespace Crud_Basico.Repositorios
 {
-    class UsuarioOperacao : Repositorio<Usuario>, IUsuarioRepositorio
+    class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
     {
-        public UsuarioOperacao() 
-        { 
+        public RepositorioUsuario()
+        {
         }
 
         public override void Atualizar(Usuario usuario)

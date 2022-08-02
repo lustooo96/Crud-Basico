@@ -1,22 +1,21 @@
 using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+using Crud_Basico.Repositorios;
 
 namespace Crud_Basico
 {
     public partial class FormPrincipal : Form
     {
-        UsuarioOperacao OperacaoDoUsuario;
+        RepositorioUsuario OperacaoDoUsuario;
         public FormPrincipal()
         {
             InitializeComponent();
-            OperacaoDoUsuario = new UsuarioOperacao();
+            OperacaoDoUsuario = new RepositorioUsuario();
         }
 
-        private void DeletarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmDeletarRegistro(object sender, EventArgs e)
         {
             try
             {
-
                 var usuarioSelecionado = ObterUsuarioSelecionado();
                 string mensagemDeletarUsuario = "Você realmente deseja deletar esse usuário ?";
                 string TituloDaMensagem = "Deletar Usuário";
@@ -43,7 +42,7 @@ namespace Crud_Basico
             return dataGridView1.Rows[linhaSelecionada].DataBoundItem as Usuario;
         }
 
-        private void EditarRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmEditarRegistro(object sender, EventArgs e)
         {
             try
             { 
@@ -58,7 +57,7 @@ namespace Crud_Basico
             }
         }
 
-        private void NovoRegistro_Clicar(object sender, EventArgs e)
+        private void AoClicarEmNovoRegistro(object sender, EventArgs e)
         {
             try
             {
@@ -71,7 +70,7 @@ namespace Crud_Basico
             }
         }
 
-        private void FecharTela_Clicar(object sender, EventArgs e)
+        private void AoClicarEmFecharTela(object sender, EventArgs e)
         {
             this.Close();
         }
