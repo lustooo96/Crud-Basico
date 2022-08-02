@@ -4,7 +4,7 @@ namespace Crud_Basico.Repositorios
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class
     {
-        protected List<T> Lista = ListaUsuario<T>.ObterInstanciaDaListaUsuario;
+        protected List<T> Lista = Lista<T>.ObterInstanciaDaListaSingleton;
 
         public abstract void Atualizar(T item);
 

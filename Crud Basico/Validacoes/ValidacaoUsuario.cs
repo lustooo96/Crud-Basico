@@ -7,7 +7,7 @@ namespace Crud_Basico.Validacoes
     {
         public static (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
         {
-            var resultadoUsuario = ListaUsuario<Usuario>.ObterInstanciaDaListaUsuario.FirstOrDefault(
+            var resultadoUsuario = Lista<Usuario>.ObterInstanciaDaListaSingleton.FirstOrDefault(
                 usuario => usuario.Email.ToLower().Contains(email.ToLower()));
 
             if (resultadoUsuario == null || resultadoUsuario.Id == id)
