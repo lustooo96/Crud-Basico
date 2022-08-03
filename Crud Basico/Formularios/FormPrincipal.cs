@@ -9,7 +9,7 @@ namespace Crud_Basico
         public FormPrincipal()
         {
             InitializeComponent();
-            BancoDeDadosOperacao = new Repositorios.RepositorioUsuarioSqlServer();
+            BancoDeDadosOperacao = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmDeletarRegistro(object sender, EventArgs e)

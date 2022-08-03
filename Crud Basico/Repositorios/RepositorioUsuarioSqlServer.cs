@@ -18,6 +18,7 @@ namespace Crud_Basico.Repositorios
 
         public void Salvar(Usuario usuario)
         {
+            if (usuario == null) throw new Exception("O Usuário não foi informado");
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
@@ -34,6 +35,7 @@ namespace Crud_Basico.Repositorios
 
         public void Atualizar(Usuario usuario)
         {
+            if (usuario == null) throw new Exception("O Usuário não foi informado");
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
@@ -51,6 +53,7 @@ namespace Crud_Basico.Repositorios
 
         public void Remover(int id)
         {
+            if (id == null) throw new Exception("O Id do Usuário não foi informado");
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
@@ -101,6 +104,7 @@ namespace Crud_Basico.Repositorios
                     }
                 }
             }
+            if (usuario == null) throw new Exception("Usuário não encontrado no sistema");
             return usuario;
         }
 

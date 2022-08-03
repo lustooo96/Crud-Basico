@@ -14,7 +14,7 @@ namespace Crud_Basico
         {
             InitializeComponent();
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
-            RepositorioUsuarioSql = new Repositorios.RepositorioUsuarioSqlServer();
+            RepositorioUsuarioSql = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
@@ -46,7 +46,6 @@ namespace Crud_Basico
                 }
                 else
                 {
-                    UnicodeEncoding ByteConverter = new UnicodeEncoding();
                     RepositorioUsuarioSql.Salvar(usuario);
                 }
                 this.Close();
