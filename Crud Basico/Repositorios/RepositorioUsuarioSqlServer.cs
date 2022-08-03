@@ -130,7 +130,7 @@ namespace Crud_Basico.Repositorios
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
             }
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-            comando.Parameters.AddWithValue("@Senha", Criptografar.CriptografarSenha(usuario.Senha));
+            comando.Parameters.AddWithValue("@Senha", Criptografia.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
             if (usuario.DataNascimento == null)
             {

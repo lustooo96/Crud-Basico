@@ -66,7 +66,7 @@ namespace Crud_Basico
             EditarRegistro = true;
             campoEntradaId.Text = usuario.IdUsuario.ToString();
             campoEntradaNome.Text = usuario.Nome!.ToString();
-            campoEntradaSenha.Text = Criptografar.DescriptografarSenha(usuario.Senha!.ToString());
+            campoEntradaSenha.Text = Criptografia.DescriptografarSenha(usuario.Senha!.ToString());
             campoEntradaDataNascimento.Text = usuario.DataNascimento.ToString();
             campoEntradaDataCriacao.Text = usuario.DataCriacao.ToString();
             campoEntradaEmail.Text = usuario.Email!.ToString();

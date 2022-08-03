@@ -26,6 +26,7 @@ namespace Crud_Basico.Servicos
                 return ListaSingleton;
             }
         }
+
         public static int ReceberNumeroDoId()
         {
             Id++;
