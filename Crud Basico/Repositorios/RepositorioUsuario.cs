@@ -11,7 +11,7 @@ namespace Crud_Basico.Repositorios
         public override void Atualizar(Usuario usuario)
         {
             if (usuario == null) throw new Exception("Usuario não foi informado");
-            var usuarioSelecionado = Lista.FirstOrDefault(listaUsuario => listaUsuario.Id == usuario.Id);
+            var usuarioSelecionado = Lista.FirstOrDefault(listaUsuario => listaUsuario.IdUsuario == usuario.IdUsuario);
             usuarioSelecionado!.Nome = usuario.Nome;
             usuarioSelecionado.Senha = usuario.Senha;
             usuarioSelecionado.Email = usuario.Email;
@@ -21,7 +21,7 @@ namespace Crud_Basico.Repositorios
         public override void Remover(int id)
         {
             if (id == decimal.Zero) throw new Exception("O id não foi informado");
-            Lista.RemoveAll(usuario => usuario.Id == id);
+            Lista.RemoveAll(usuario => usuario.IdUsuario == id);
         }
 
     }

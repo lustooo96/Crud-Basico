@@ -5,11 +5,11 @@ namespace Crud_Basico
 {
     public partial class FormPrincipal : Form
     {
-        RepositorioUsuario OperacaoDoUsuario;
+        RepositorioUsuarioSqlServer BancoDeDadosOperacao;
         public FormPrincipal()
         {
             InitializeComponent();
-            OperacaoDoUsuario = new RepositorioUsuario();
+            BancoDeDadosOperacao = new Repositorios.RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmDeletarRegistro(object sender, EventArgs e)
@@ -24,8 +24,9 @@ namespace Crud_Basico
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (resultadoAlertaDeDeletar == DialogResult.Yes)
                 {
-                    OperacaoDoUsuario.Remover(usuarioSelecionado.Id);
-                    dataGridView1.DataSource = OperacaoDoUsuario.Listar();
+                   
+                    BancoDeDadosOperacao.Remover((int)usuarioSelecionado.IdUsuario);
+                    dataGridView1.DataSource = BancoDeDadosOperacao.Listar();
                 }
             }
             catch (Exception erro)
@@ -38,8 +39,9 @@ namespace Crud_Basico
         private Usuario ObterUsuarioSelecionado()
         {
             if (dataGridView1.SelectedCells.Count == decimal.Zero) throw new Exception("Selecione um usuário");
-            var linhaSelecionada = dataGridView1.CurrentCell.RowIndex;
-            return dataGridView1.Rows[linhaSelecionada].DataBoundItem as Usuario;
+            var idUsuarioSelecionadoNaGrid = dataGridView1.CurrentRow.Cells["Idusuario"].Value.ToString();
+            Usuario usuario = BancoDeDadosOperacao.BuscarUsuarioPorId(idUsuarioSelecionadoNaGrid);
+            return usuario;
         }
 
         private void AoClicarEmEditarRegistro(object sender, EventArgs e)
@@ -79,7 +81,7 @@ namespace Crud_Basico
         {
             try
             {
-                dataGridView1.DataSource = OperacaoDoUsuario.Listar();
+                dataGridView1.DataSource = BancoDeDadosOperacao.Listar();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
             catch (Exception erro) 
