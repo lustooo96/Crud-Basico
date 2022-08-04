@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Crud_Basico.Dominio.Criptografias
+namespace Crud_Basico.Infra.Criptografias
 {
     public static class CriptografiaSenha
     {

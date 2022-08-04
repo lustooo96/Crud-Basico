@@ -1,5 +1,4 @@
-﻿using Crud_Basico.Dominio.Criptografias;
-using Crud_Basico.Dominio.Modelos;
+﻿using Crud_Basico.Dominio.Modelos;
 using Crud_Basico.Infra.Repositorios;
 using Crud_Basico.Infra.Validacoes;
 
@@ -64,8 +63,8 @@ namespace Crud_Basico
         {
             EditarRegistro = true;
             campoEntradaId.Text = usuario.IdUsuario.ToString();
-            campoEntradaNome.Text = usuario.Nome!.ToString();
-            campoEntradaSenha.Text = CriptografiaSenha.Descriptografar(usuario.Senha!.ToString());
+            campoEntradaNome.Text = usuario.Nome.ToString();
+            campoEntradaSenha.Text = usuario.Senha.ToString();
             campoEntradaDataNascimento.Text = usuario.DataNascimento.ToString();
             campoEntradaDataCriacao.Text = usuario.DataCriacao.ToString();
             campoEntradaEmail.Text = usuario.Email!.ToString();

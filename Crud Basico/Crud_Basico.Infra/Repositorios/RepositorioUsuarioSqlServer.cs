@@ -1,4 +1,4 @@
-﻿using Crud_Basico.Dominio.Criptografias;
+﻿using Crud_Basico.Infra.Criptografias;
 using Crud_Basico.Dominio.Interfaces;
 using Crud_Basico.Dominio.Modelos;
 using System.Data;
@@ -118,7 +118,7 @@ namespace Crud_Basico.Infra.Repositorios
             Usuario usuarioDoBancoDeDados = new Usuario(
                            reader.GetInt32("idusuario"),
                            reader.GetString("nome"),
-                           reader.GetString("senha"),
+                           CriptografiaSenha.Descriptografar(reader.GetString("senha")),
                            reader.GetString("email"),
                            dataNascimentoUsuario,
                            reader.GetDateTime("data_criacao"));
