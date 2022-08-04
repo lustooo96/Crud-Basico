@@ -1,7 +1,7 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+﻿using Crud_Basico.Dominio.Interfaces;
+using Crud_Basico.Infra.Servicos;
 
-namespace Crud_Basico.Repositorios
+namespace Crud_Basico.Infra.Repositorios
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class
     {

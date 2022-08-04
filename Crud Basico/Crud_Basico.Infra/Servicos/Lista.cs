@@ -1,6 +1,5 @@
-﻿using Crud_Basico.Modelo;
-
-namespace Crud_Basico.Servicos
+﻿
+namespace Crud_Basico.Infra.Servicos
 {
     public sealed class Lista<T>
     {

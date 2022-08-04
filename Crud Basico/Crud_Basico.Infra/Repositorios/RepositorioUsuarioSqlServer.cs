@@ -1,12 +1,12 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+﻿using Crud_Basico.Dominio.Criptografias;
+using Crud_Basico.Dominio.Interfaces;
+using Crud_Basico.Dominio.Modelos;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Text;
 
 
-namespace Crud_Basico.Repositorios
+namespace Crud_Basico.Infra.Repositorios
 {
     class RepositorioUsuarioSqlServer : IUsuarioRepositorio
     {
@@ -133,7 +133,7 @@ namespace Crud_Basico.Repositorios
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
             }
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-            comando.Parameters.AddWithValue("@Senha", Criptografia.CriptografarSenha(usuario.Senha));
+            comando.Parameters.AddWithValue("@Senha", CriptografiaSenha.Criptografar(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
             if (usuario.DataNascimento == null)
             {

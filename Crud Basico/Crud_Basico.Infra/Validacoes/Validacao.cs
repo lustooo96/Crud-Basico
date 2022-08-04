@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Crud_Basico.Validacoes
+namespace Crud_Basico.Infra.Validacoes
 {
     class Validacao
     {
