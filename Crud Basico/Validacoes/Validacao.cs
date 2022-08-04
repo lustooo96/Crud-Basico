@@ -9,6 +9,7 @@ namespace Crud_Basico.Validacoes
             if (nome.Length == 0 || string.IsNullOrWhiteSpace(nome)) return (false, "Informe o seu Nome");
             return (true, "");
         }
+
         public static (bool validacao, string mensagem) ValidarSenha(string senha)
         {
             if (senha.Length == decimal.Zero || string.IsNullOrWhiteSpace(senha)) return (false, "Informe sua senha");
@@ -36,11 +37,11 @@ namespace Crud_Basico.Validacoes
             }
             return (true, "");
         }
+
         public static bool ValidarData(string data)
         {
             var regex = new Regex(@"(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/((1[2-9]|[2-9][0-9])[0-9]{2})");
             return regex.Match(data).Success;
-
         }
     }
 }

@@ -2,18 +2,19 @@
 using Crud_Basico.Repositorios;
 using Crud_Basico.Servicos;
 using Crud_Basico.Validacoes;
+using System.Text;
 
 namespace Crud_Basico
 {
     public partial class FormRegistro : Form
     {
-        RepositorioUsuario RepositorioUsuario;
+        RepositorioUsuarioSqlServer RepositorioUsuarioSql;
         private bool EditarRegistro = false;
         public FormRegistro(Usuario usuario)
         {
             InitializeComponent();
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
-            RepositorioUsuario = new RepositorioUsuario();
+            RepositorioUsuarioSql = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace Crud_Basico
 
                 DateTime? dataNascimento = campoEntradaDataNascimento.Text.Replace("/", "").Trim() != "" ?
                         DateTime.Parse(campoEntradaDataNascimento.Text) : null;
-                var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : Lista<Usuario>.ReceberNumeroDoId();
+                int? id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : null;
                 var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
 
                 var usuario = new Usuario(
@@ -41,11 +42,11 @@ namespace Crud_Basico
                 
                 if (EditarRegistro)
                 {
-                    RepositorioUsuario.Atualizar(usuario);
+                    RepositorioUsuarioSql.Atualizar(usuario);
                 }
                 else
                 {
-                    RepositorioUsuario.Salvar(usuario);
+                    RepositorioUsuarioSql.Salvar(usuario);
                 }
                 this.Close();
             }
@@ -63,9 +64,9 @@ namespace Crud_Basico
         private void CarregarDadosParaEditarRegistro(Usuario usuario)
         {
             EditarRegistro = true;
-            campoEntradaId.Text = usuario.Id.ToString();
+            campoEntradaId.Text = usuario.IdUsuario.ToString();
             campoEntradaNome.Text = usuario.Nome!.ToString();
-            campoEntradaSenha.Text = usuario.Senha!.ToString();
+            campoEntradaSenha.Text = Criptografia.DescriptografarSenha(usuario.Senha!.ToString());
             campoEntradaDataNascimento.Text = usuario.DataNascimento.ToString();
             campoEntradaDataCriacao.Text = usuario.DataCriacao.ToString();
             campoEntradaEmail.Text = usuario.Email!.ToString();

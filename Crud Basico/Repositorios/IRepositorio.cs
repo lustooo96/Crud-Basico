@@ -8,6 +8,7 @@ namespace Crud_Basico.Repositorios
         void Atualizar(T item);
 
         void Remover(int id);
+
         List<T> Listar();
     }
 }
