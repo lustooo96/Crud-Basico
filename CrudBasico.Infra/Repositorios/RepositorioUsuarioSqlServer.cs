@@ -1,14 +1,14 @@
-﻿using Crud_Basico.Infra.Criptografias;
-using Crud_Basico.Dominio.Interfaces;
-using Crud_Basico.Dominio.Modelos;
+﻿using CrudBasico.Dominio.Criptografias;
+using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Modelos;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
 
-namespace Crud_Basico.Infra.Repositorios
+namespace CrudBasico.Infra.Repositorios
 {
-    class RepositorioUsuarioSqlServer : IUsuarioRepositorio
+    public class RepositorioUsuarioSqlServer : IUsuarioRepositorio
     {
         private string ConexaoString = ("Data Source=INVENT0081\\SQLEXPRESS;Initial Catalog=dados;Integrated Security=true;User ID=sa;Password=Daniela@12");
 

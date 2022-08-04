@@ -1,8 +1,8 @@
-﻿using Crud_Basico.Dominio.Modelos;
-using Crud_Basico.Infra.Repositorios;
-using Crud_Basico.Infra.Validacoes;
+﻿using CrudBasico.Dominio.Modelos;
+using CrudBasico.Infra.Repositorios;
+using CrudBasico.Infra.Validacoes;
 
-namespace Crud_Basico
+namespace CrudBasico
 {
     public partial class FormRegistro : Form
     {

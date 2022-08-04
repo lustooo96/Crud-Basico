@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Crud_Basico.Infra.Validacoes
+namespace CrudBasico.Infra.Validacoes
 {
-    class Validacao
+    public class Validacao
     {
         public static (bool validacao, string mensagem) ValidarNome(string nome)
         {

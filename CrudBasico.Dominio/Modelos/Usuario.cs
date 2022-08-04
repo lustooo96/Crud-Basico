@@ -1,4 +1,4 @@
-﻿namespace Crud_Basico.Dominio.Modelos
+﻿namespace CrudBasico.Dominio.Modelos
 {
     public class Usuario
     {

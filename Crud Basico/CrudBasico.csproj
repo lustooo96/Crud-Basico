@@ -10,7 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <ProjectReference Include="..\CrudBasico.Dominio\CrudBasico.Dominio.csproj" />
+    <ProjectReference Include="..\CrudBasico.Infra\CrudBasico.Infra.csproj" />
   </ItemGroup>
 
 </Project>

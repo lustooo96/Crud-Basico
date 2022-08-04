@@ -1,5 +1,5 @@
 ﻿
-namespace Crud_Basico.Infra.Servicos
+namespace CrudBasico.Dominio.Servicos
 {
     public sealed class Lista<T>
     {
