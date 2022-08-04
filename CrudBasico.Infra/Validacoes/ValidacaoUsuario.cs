@@ -24,3 +24,4 @@ namespace CrudBasico.Infra.Validacoes
         }
     }
 }
+  
