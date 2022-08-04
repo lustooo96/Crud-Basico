@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using Crud_Basico.Validacoes;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Crud_Basico.Servicos
@@ -16,13 +17,14 @@ namespace Crud_Basico.Servicos
             }
             return Convert.ToBase64String(senhaCriptografada);
         }
-        public static string DescriptografarSenha(string senhaParaDescriptografada)
+
+        public static string DescriptografarSenha(string senhaParaDescriptografar)
         {
             byte[] senhaDescriptografada;
             using (RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(2048))
             {
                 rsaProvider.FromXmlString(ChaveUnica);
-                senhaDescriptografada = rsaProvider.Decrypt(Convert.FromBase64String(senhaParaDescriptografada), true);
+                senhaDescriptografada = rsaProvider.Decrypt(Convert.FromBase64String(senhaParaDescriptografar), true);
             }
             return Encoding.UTF8.GetString(senhaDescriptografada);
         }

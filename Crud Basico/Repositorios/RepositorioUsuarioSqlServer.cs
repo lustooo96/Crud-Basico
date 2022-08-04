@@ -27,7 +27,7 @@ namespace Crud_Basico.Repositorios
 
                 using (SqlCommand comando = new SqlCommand(consultarParaSalvarUsuario, conexao))
                 {
-                    CriarParametrosDoSqlCommandParaUsuario(comando,usuario);
+                    CriarParametrosDoSqlCommandParaUsuario(comando, usuario);
                     comando.ExecuteNonQuery();
                 }
             }
@@ -104,7 +104,12 @@ namespace Crud_Basico.Repositorios
                     }
                 }
             }
-            if (usuario == null) throw new Exception("Usuário não encontrado no sistema");
+            if (usuario == null)
+            {
+                string mensagemUsuarioNaoEncontrado = "Não foi encontrado o Usuário com o ID :" + id;
+                throw new Exception(mensagemUsuarioNaoEncontrado);
+            }
+
             return usuario;
         }
 
@@ -125,7 +130,7 @@ namespace Crud_Basico.Repositorios
 
         private void CriarParametrosDoSqlCommandParaUsuario(SqlCommand comando, Usuario usuario)
         {
-            if (usuario.IdUsuario.HasValue) 
+            if (usuario.IdUsuario.HasValue)
             {
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
             }
