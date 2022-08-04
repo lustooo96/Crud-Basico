@@ -109,13 +109,11 @@ namespace Crud_Basico.Repositorios
                 string mensagemUsuarioNaoEncontrado = "Não foi encontrado o Usuário com o ID :" + id;
                 throw new Exception(mensagemUsuarioNaoEncontrado);
             }
-
             return usuario;
         }
 
         private Usuario CriarUsuarioAtravesDoBanco(SqlDataReader reader)
         {
-
             DateTime? dataNascimentoUsuario = reader.IsDBNull("data_nascimento") ? null : reader.GetDateTime("data_nascimento");
             Usuario usuarioDoBancoDeDados = new Usuario(
                            reader.GetInt32("idusuario"),
