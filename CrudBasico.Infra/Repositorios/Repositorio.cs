@@ -15,7 +15,8 @@ namespace CrudBasico.Infra.Repositorios
         }
 
         public abstract void Remover(int id);
-            
+
+        public abstract T BuscarUsuarioPorId(string id);
         public virtual void Salvar(T item)
         {
             if (item == null) throw new Exception("Usuario não foi informado");

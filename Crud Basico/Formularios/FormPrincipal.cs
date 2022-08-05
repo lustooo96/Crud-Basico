@@ -1,3 +1,4 @@
+using CrudBasico.Dominio.Interfaces;
 using CrudBasico.Dominio.Modelos;
 using CrudBasico.Infra.Repositorios;
 
@@ -5,11 +6,11 @@ namespace CrudBasico
 {
     public partial class FormPrincipal : Form
     {
-        RepositorioUsuarioSqlServer BancoDeDadosOperacao;
-        public FormPrincipal()
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
+        public FormPrincipal(IUsuarioRepositorio usuarioRepositorio)
         {
+            _usuarioRepositorio = usuarioRepositorio;
             InitializeComponent();
-            BancoDeDadosOperacao = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmDeletarRegistro(object sender, EventArgs e)
@@ -24,9 +25,8 @@ namespace CrudBasico
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (resultadoAlertaDeDeletar == DialogResult.Yes)
                 {
-                   
-                    BancoDeDadosOperacao.Remover((int)usuarioSelecionado.IdUsuario);
-                    dataGridView1.DataSource = BancoDeDadosOperacao.Listar();
+                    _usuarioRepositorio.Remover((int)usuarioSelecionado.IdUsuario);
+                    dataGridView1.DataSource = _usuarioRepositorio.Listar();
                 }
             }
             catch (Exception erro)
@@ -40,7 +40,7 @@ namespace CrudBasico
         {
             if (dataGridView1.SelectedCells.Count == decimal.Zero) throw new Exception("Selecione um usuário");
             var idUsuarioSelecionadoNaGrid = dataGridView1.CurrentRow.Cells["Idusuario"].Value.ToString();
-            Usuario usuario = BancoDeDadosOperacao.BuscarUsuarioPorId(idUsuarioSelecionadoNaGrid);
+            Usuario usuario = _usuarioRepositorio.BuscarUsuarioPorId(idUsuarioSelecionadoNaGrid);
             return usuario;
         }
 
@@ -49,7 +49,7 @@ namespace CrudBasico
             try
             { 
                 var usuarioSelecionado = ObterUsuarioSelecionado();
-                var telaRegistro = new FormRegistro(usuarioSelecionado);
+                var telaRegistro = new FormRegistro(usuarioSelecionado , _usuarioRepositorio);
 
                 telaRegistro.ShowDialog();
             }
@@ -63,7 +63,7 @@ namespace CrudBasico
         {
             try
             {
-                var telaRegistro = new FormRegistro(null);
+                var telaRegistro = new FormRegistro(null , _usuarioRepositorio);
                 telaRegistro.ShowDialog();
             }
             catch (Exception erro)
@@ -81,7 +81,7 @@ namespace CrudBasico
         {
             try
             {
-                dataGridView1.DataSource = BancoDeDadosOperacao.Listar();
+                dataGridView1.DataSource = _usuarioRepositorio.Listar();
                 dataGridView1.Columns["Senha"].Visible = false;
             }
             catch (Exception erro) 

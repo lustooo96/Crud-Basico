@@ -1,18 +1,19 @@
-﻿using CrudBasico.Dominio.Modelos;
-using CrudBasico.Infra.Repositorios;
+﻿using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Modelos;
+using CrudBasico.Dominio.Validacoes;
 using CrudBasico.Infra.Validacoes;
 
 namespace CrudBasico
 {
     public partial class FormRegistro : Form
     {
-        RepositorioUsuarioSqlServer RepositorioUsuarioSql;
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
         private bool EditarRegistro = false;
-        public FormRegistro(Usuario usuario)
+        public FormRegistro(Usuario usuario, IUsuarioRepositorio usuarioRepositorio)
         {
             InitializeComponent();
+            _usuarioRepositorio = usuarioRepositorio;
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
-            RepositorioUsuarioSql = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
@@ -40,11 +41,11 @@ namespace CrudBasico
                 
                 if (EditarRegistro)
                 {
-                    RepositorioUsuarioSql.Atualizar(usuario);
+                    _usuarioRepositorio.Atualizar(usuario);
                 }
                 else
                 {
-                    RepositorioUsuarioSql.Salvar(usuario);
+                    _usuarioRepositorio.Salvar(usuario);
                 }
                 this.Close();
             }
@@ -113,7 +114,8 @@ namespace CrudBasico
 
         {
             var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
-            var emailPodeSerCriado = ValidacaoUsuario.EmailPodeSerCriado(email, id);
+            var validacaoUsuario = new ValidacaoUsuario(_usuarioRepositorio);
+            var emailPodeSerCriado = validacaoUsuario.EmailPodeSerCriado(email, id);
             if (!emailPodeSerCriado.validacao)
             {
                 return emailPodeSerCriado;

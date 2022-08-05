@@ -65,7 +65,6 @@ namespace CrudBasico.Infra.Repositorios
                 }
             }
         }
-
         public List<Usuario> Listar()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();

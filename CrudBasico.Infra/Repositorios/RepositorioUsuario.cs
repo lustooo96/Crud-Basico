@@ -3,12 +3,11 @@ using CrudBasico.Dominio.Modelos;
 
 namespace CrudBasico.Infra.Repositorios
 {
-    class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
+    public class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
     {
         public RepositorioUsuario()
         {
         }
-
         public override void Atualizar(Usuario usuario)
         {
             if (usuario == null) throw new Exception("Usuario não foi informado");
@@ -17,6 +16,13 @@ namespace CrudBasico.Infra.Repositorios
             usuarioSelecionado.Senha = usuario.Senha;
             usuarioSelecionado.Email = usuario.Email;
             usuarioSelecionado.DataNascimento = usuario.DataNascimento;
+        }
+        public override Usuario BuscarUsuarioPorId(string id) 
+        {
+            var idUsuario = Convert.ToInt32(id);
+            if (idUsuario == null) throw new Exception("Id não foi informado");
+            Usuario usuario = Lista.FirstOrDefault(listaUsuario => listaUsuario.IdUsuario == idUsuario);
+            return usuario;
         }
 
         public override void Remover(int id)
