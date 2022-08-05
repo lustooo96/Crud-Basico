@@ -13,6 +13,7 @@
         public Usuario() 
         { 
         }
+
         public Usuario(int? id, string nome, string senha, string email, DateTime? data_nascimento, DateTime data_criacao)
         {
             this.IdUsuario = id;

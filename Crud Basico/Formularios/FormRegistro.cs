@@ -9,6 +9,7 @@ namespace CrudBasico
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private bool EditarRegistro = false;
+
         public FormRegistro(Usuario usuario, IUsuarioRepositorio usuarioRepositorio)
         {
             InitializeComponent();

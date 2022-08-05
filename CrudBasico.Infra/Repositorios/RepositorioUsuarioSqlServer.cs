@@ -68,6 +68,7 @@ namespace CrudBasico.Infra.Repositorios
 
         public Usuario? BuscarUmUsuarioComEmailRepetido(string email) 
         {
+            if (email == null) throw new Exception("O email do Usuário não foi informado");
             Usuario? usuario = null;
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
@@ -87,6 +88,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             return usuario;
         }
+
         public List<Usuario> Listar()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
@@ -149,22 +151,24 @@ namespace CrudBasico.Infra.Repositorios
 
         private void CriarParametrosDoSqlCommandParaUsuario(SqlCommand comando, Usuario usuario)
         {
-            if (usuario.IdUsuario.HasValue)
+            if (usuario.IdUsuario.HasValue) 
             {
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
-            }
+            } 
+            
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
             comando.Parameters.AddWithValue("@Senha", ServicoDeCriptografia.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
+            comando.Parameters.AddWithValue("@Data_criacao", usuario.DataCriacao);
+
             if (usuario.DataNascimento == null)
             {
                 comando.Parameters.AddWithValue("@Data_nascimento", DBNull.Value);
             }
-            else
+            else 
             {
                 comando.Parameters.AddWithValue("@Data_nascimento", usuario.DataNascimento);
             }
-            comando.Parameters.AddWithValue("@Data_criacao", usuario.DataCriacao);
         }
     }
 }

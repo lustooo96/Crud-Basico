@@ -7,6 +7,7 @@ namespace CrudBasico
     public partial class FormPrincipal : Form
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+
         public FormPrincipal(IUsuarioRepositorio usuarioRepositorio)
         {
             _usuarioRepositorio = usuarioRepositorio;
@@ -33,7 +34,6 @@ namespace CrudBasico
             {
                 MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
-
         }
 
         private Usuario ObterUsuarioSelecionado()

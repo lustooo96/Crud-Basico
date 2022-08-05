@@ -8,6 +8,7 @@ namespace CrudBasico.Infra.Repositorios
         public RepositorioUsuario()
         {
         }
+
         public override void Atualizar(Usuario usuario)
         {
             if (usuario == null) throw new Exception("Usuario não foi informado");
@@ -17,6 +18,7 @@ namespace CrudBasico.Infra.Repositorios
             usuarioSelecionado.Email = usuario.Email;
             usuarioSelecionado.DataNascimento = usuario.DataNascimento;
         }
+
         public override Usuario BuscarUsuarioPorId(string id) 
         {
             var idUsuario = Convert.ToInt32(id);
@@ -30,6 +32,5 @@ namespace CrudBasico.Infra.Repositorios
             if (id == decimal.Zero) throw new Exception("O id não foi informado");
             Lista.RemoveAll(usuario => usuario.IdUsuario == id);
         }
-
     }
 }

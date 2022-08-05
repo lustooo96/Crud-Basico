@@ -12,6 +12,7 @@ namespace CrudBasico.Dominio.Validacoes
             _usuarioRepositorio = usuarioRepositorio;
 
         }
+
         public (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
         {
             var resultadoUsuario = _usuarioRepositorio.BuscarUmUsuarioComEmailRepetido(email);
@@ -24,7 +25,6 @@ namespace CrudBasico.Dominio.Validacoes
                 return (false, "Email já Cadastrado");
             }
         }
-
     }
 }
   

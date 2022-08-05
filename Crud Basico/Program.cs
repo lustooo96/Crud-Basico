@@ -11,8 +11,9 @@ namespace CrudBasico
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            var builder = CriarServicoInjecao().Build();
-            Application.Run(builder.Services.GetRequiredService<FormPrincipal>());
+            IHost builder = CriarServicoInjecao().Build();
+            FormPrincipal formPrincipal = builder.Services.GetRequiredService<FormPrincipal>();
+            Application.Run(formPrincipal);
         }
 
         private static IHostBuilder CriarServicoInjecao() =>
