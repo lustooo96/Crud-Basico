@@ -1,6 +1,7 @@
-﻿using Crud_Basico.Modelo;
+﻿using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Modelos;
 
-namespace Crud_Basico.Repositorios
+namespace CrudBasico.Infra.Repositorios
 {
     class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
     {

@@ -1,4 +1,4 @@
-namespace Crud_Basico
+namespace CrudBasico
 {
     internal static class Program
     {

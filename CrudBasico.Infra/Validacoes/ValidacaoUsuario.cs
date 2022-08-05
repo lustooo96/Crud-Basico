@@ -1,8 +1,7 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Repositorios;
-using Crud_Basico.Servicos;
+﻿using CrudBasico.Dominio.Modelos;
+using CrudBasico.Infra.Repositorios;
 
-namespace Crud_Basico.Validacoes
+namespace CrudBasico.Infra.Validacoes
 {
     public class ValidacaoUsuario
     {
@@ -25,3 +24,4 @@ namespace Crud_Basico.Validacoes
         }
     }
 }
+  

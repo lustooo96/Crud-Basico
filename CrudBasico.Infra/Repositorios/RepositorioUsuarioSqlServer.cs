@@ -1,14 +1,14 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+﻿using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Modelos;
+using CrudBasico.Dominio.Servicos;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Text;
 
 
-namespace Crud_Basico.Repositorios
+namespace CrudBasico.Infra.Repositorios
 {
-    class RepositorioUsuarioSqlServer : IUsuarioRepositorio
+    public class RepositorioUsuarioSqlServer : IUsuarioRepositorio
     {
         private string ConexaoString = ("Data Source=INVENT0081\\SQLEXPRESS;Initial Catalog=dados;Integrated Security=true;User ID=sa;Password=Daniela@12");
 
@@ -118,7 +118,7 @@ namespace Crud_Basico.Repositorios
             Usuario usuarioDoBancoDeDados = new Usuario(
                            reader.GetInt32("idusuario"),
                            reader.GetString("nome"),
-                           reader.GetString("senha"),
+                           ServicoDeCriptografia.DescriptografarSenha(reader.GetString("senha")),
                            reader.GetString("email"),
                            dataNascimentoUsuario,
                            reader.GetDateTime("data_criacao"));
@@ -133,7 +133,7 @@ namespace Crud_Basico.Repositorios
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
             }
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-            comando.Parameters.AddWithValue("@Senha", Criptografia.CriptografarSenha(usuario.Senha));
+            comando.Parameters.AddWithValue("@Senha", ServicoDeCriptografia.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
             if (usuario.DataNascimento == null)
             {

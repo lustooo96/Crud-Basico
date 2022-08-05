@@ -1,7 +1,7 @@
-using Crud_Basico.Modelo;
-using Crud_Basico.Repositorios;
+using CrudBasico.Dominio.Modelos;
+using CrudBasico.Infra.Repositorios;
 
-namespace Crud_Basico
+namespace CrudBasico
 {
     public partial class FormPrincipal : Form
     {

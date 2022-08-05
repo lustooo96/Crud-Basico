@@ -1,4 +1,4 @@
-﻿namespace Crud_Basico
+﻿namespace CrudBasico
 {
     partial class FormPrincipal
     {

@@ -1,11 +1,11 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Servicos;
+﻿using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Servicos;
 
-namespace Crud_Basico.Repositorios
+namespace CrudBasico.Infra.Repositorios
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : class
     {
-        protected List<T> Lista = Lista<T>.ObterInstanciaDaListaSingleton;
+        protected List<T> Lista = ServicoListaSingleton<T>.ObterInstanciaDaListaSingleton;
 
         public abstract void Atualizar(T item);
 

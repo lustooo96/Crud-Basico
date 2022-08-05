@@ -1,5 +1,4 @@
-﻿
-namespace Crud_Basico.Repositorios
+﻿namespace CrudBasico.Dominio.Interfaces
 {
     public interface IRepositorio<T> where T : class
     {

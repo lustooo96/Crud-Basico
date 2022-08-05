@@ -1,10 +1,8 @@
-﻿using Crud_Basico.Modelo;
-using Crud_Basico.Repositorios;
-using Crud_Basico.Servicos;
-using Crud_Basico.Validacoes;
-using System.Text;
+﻿using CrudBasico.Dominio.Modelos;
+using CrudBasico.Infra.Repositorios;
+using CrudBasico.Infra.Validacoes;
 
-namespace Crud_Basico
+namespace CrudBasico
 {
     public partial class FormRegistro : Form
     {
@@ -65,8 +63,8 @@ namespace Crud_Basico
         {
             EditarRegistro = true;
             campoEntradaId.Text = usuario.IdUsuario.ToString();
-            campoEntradaNome.Text = usuario.Nome!.ToString();
-            campoEntradaSenha.Text = Criptografia.DescriptografarSenha(usuario.Senha!.ToString());
+            campoEntradaNome.Text = usuario.Nome.ToString();
+            campoEntradaSenha.Text = usuario.Senha.ToString();
             campoEntradaDataNascimento.Text = usuario.DataNascimento.ToString();
             campoEntradaDataCriacao.Text = usuario.DataCriacao.ToString();
             campoEntradaEmail.Text = usuario.Email!.ToString();

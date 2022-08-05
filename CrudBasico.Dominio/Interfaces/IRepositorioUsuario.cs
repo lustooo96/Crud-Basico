@@ -1,6 +1,6 @@
-﻿using Crud_Basico.Modelo;
+﻿using CrudBasico.Dominio.Modelos;
 
-namespace Crud_Basico.Repositorios
+namespace CrudBasico.Dominio.Interfaces
 {
 
     public interface IUsuarioRepositorio : IRepositorio<Usuario>
