@@ -1,13 +1,13 @@
 ﻿
 namespace CrudBasico.Dominio.Servicos
 {
-    public sealed class Lista<T>
+    public sealed class ServicoListaSingleton<T>
     {
         private static object ObjetoFechado = new object();
         private static List<T>? ListaSingleton;
         private static int Id = 0;
 
-        private Lista() 
+        private ServicoListaSingleton() 
         { 
         }
            

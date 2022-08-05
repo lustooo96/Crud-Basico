@@ -1,6 +1,6 @@
-﻿using CrudBasico.Dominio.Criptografias;
-using CrudBasico.Dominio.Interfaces;
+﻿using CrudBasico.Dominio.Interfaces;
 using CrudBasico.Dominio.Modelos;
+using CrudBasico.Dominio.Servicos;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
@@ -118,7 +118,7 @@ namespace CrudBasico.Infra.Repositorios
             Usuario usuarioDoBancoDeDados = new Usuario(
                            reader.GetInt32("idusuario"),
                            reader.GetString("nome"),
-                           CriptografiaSenha.Descriptografar(reader.GetString("senha")),
+                           ServicoDeCriptografia.DescriptografarSenha(reader.GetString("senha")),
                            reader.GetString("email"),
                            dataNascimentoUsuario,
                            reader.GetDateTime("data_criacao"));
@@ -133,7 +133,7 @@ namespace CrudBasico.Infra.Repositorios
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
             }
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-            comando.Parameters.AddWithValue("@Senha", CriptografiaSenha.Criptografar(usuario.Senha));
+            comando.Parameters.AddWithValue("@Senha", ServicoDeCriptografia.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
             if (usuario.DataNascimento == null)
             {
