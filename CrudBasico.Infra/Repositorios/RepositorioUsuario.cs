@@ -3,7 +3,7 @@ using CrudBasico.Dominio.Modelos;
 
 namespace CrudBasico.Infra.Repositorios
 {
-    public class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
+    public class RepositorioUsuario : Repositorio<Usuario>
     {
         public RepositorioUsuario()
         {

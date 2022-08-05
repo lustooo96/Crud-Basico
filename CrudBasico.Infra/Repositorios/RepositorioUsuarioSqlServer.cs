@@ -65,6 +65,28 @@ namespace CrudBasico.Infra.Repositorios
                 }
             }
         }
+
+        public Usuario? BuscarUsuarioComEmailRepetido(string email) 
+        {
+            Usuario? usuario = null;
+            using (SqlConnection conexao = new SqlConnection(ConexaoString))
+            {
+                conexao.Open();
+                string consultaParaListarTodosUsuarios = "SELECT * FROM dbo.usuario where email = @Email";
+                using (SqlCommand comando = new SqlCommand(consultaParaListarTodosUsuarios, conexao))
+                {
+                    comando.Parameters.AddWithValue("@Email", email);
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usuario = CriarUsuarioAtravesDoBanco(reader);
+                        }
+                    }
+                }
+            }
+            return usuario;
+        }
         public List<Usuario> Listar()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
