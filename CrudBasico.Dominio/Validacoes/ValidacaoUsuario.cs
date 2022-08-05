@@ -14,7 +14,7 @@ namespace CrudBasico.Dominio.Validacoes
         }
         public (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
         {
-            var resultadoUsuario = _usuarioRepositorio.BuscarUsuarioComEmailRepetido(email);
+            var resultadoUsuario = _usuarioRepositorio.BuscarUmUsuarioComEmailRepetido(email);
             if (resultadoUsuario == null || resultadoUsuario.IdUsuario == id)
             {
                 return (true, "");

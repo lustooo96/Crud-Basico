@@ -12,7 +12,7 @@ namespace CrudBasico
             _usuarioRepositorio = usuarioRepositorio;
             InitializeComponent();
         }
-
+        
         private void AoClicarEmDeletarRegistro(object sender, EventArgs e)
         {
             try
@@ -40,7 +40,7 @@ namespace CrudBasico
         {
             if (dataGridView1.SelectedCells.Count == decimal.Zero) throw new Exception("Selecione um usuário");
             var idUsuarioSelecionadoNaGrid = dataGridView1.CurrentRow.Cells["Idusuario"].Value.ToString();
-            Usuario usuario = _usuarioRepositorio.BuscarUsuarioPorId(idUsuarioSelecionadoNaGrid);
+            Usuario usuario = _usuarioRepositorio.BuscarUsuarioPorId(Convert.ToInt32(idUsuarioSelecionadoNaGrid));
             return usuario;
         }
 
