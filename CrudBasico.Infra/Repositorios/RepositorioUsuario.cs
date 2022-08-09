@@ -3,7 +3,7 @@ using CrudBasico.Dominio.Modelos;
 
 namespace CrudBasico.Infra.Repositorios
 {
-    class RepositorioUsuario : Repositorio<Usuario>, IUsuarioRepositorio
+    public class RepositorioUsuario : Repositorio<Usuario>
     {
         public RepositorioUsuario()
         {
@@ -19,11 +19,18 @@ namespace CrudBasico.Infra.Repositorios
             usuarioSelecionado.DataNascimento = usuario.DataNascimento;
         }
 
+        public override Usuario BuscarUsuarioPorId(string id) 
+        {
+            var idUsuario = Convert.ToInt32(id);
+            if (idUsuario == null) throw new Exception("Id não foi informado");
+            Usuario usuario = Lista.FirstOrDefault(listaUsuario => listaUsuario.IdUsuario == idUsuario);
+            return usuario;
+        }
+
         public override void Remover(int id)
         {
             if (id == decimal.Zero) throw new Exception("O id não foi informado");
             Lista.RemoveAll(usuario => usuario.IdUsuario == id);
         }
-
     }
 }

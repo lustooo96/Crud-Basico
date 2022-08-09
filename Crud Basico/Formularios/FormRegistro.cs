@@ -1,23 +1,25 @@
-﻿using CrudBasico.Dominio.Modelos;
-using CrudBasico.Infra.Repositorios;
+﻿using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Dominio.Modelos;
+using CrudBasico.Dominio.Validacoes;
 using CrudBasico.Infra.Validacoes;
 
 namespace CrudBasico
 {
     public partial class FormRegistro : Form
     {
-        RepositorioUsuarioSqlServer RepositorioUsuarioSql;
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
         private bool EditarRegistro = false;
-        public FormRegistro(Usuario usuario)
+
+        public FormRegistro(Usuario usuario, IUsuarioRepositorio usuarioRepositorio)
         {
             InitializeComponent();
+            _usuarioRepositorio = usuarioRepositorio;
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
-            RepositorioUsuarioSql = new RepositorioUsuarioSqlServer();
         }
 
         private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
         {
-            try
+                try
             {
                 var formUsuarioValidado = ValidarFormularioUsuario(campoEntradaNome.Text,
                     campoEntradaSenha.Text,campoEntradaEmail.Text, campoEntradaDataNascimento.Text);
@@ -40,11 +42,11 @@ namespace CrudBasico
                 
                 if (EditarRegistro)
                 {
-                    RepositorioUsuarioSql.Atualizar(usuario);
+                    _usuarioRepositorio.Atualizar(usuario);
                 }
                 else
                 {
-                    RepositorioUsuarioSql.Salvar(usuario);
+                    _usuarioRepositorio.Salvar(usuario);
                 }
                 this.Close();
             }
@@ -77,7 +79,10 @@ namespace CrudBasico
         
         private bool ValidarFormularioUsuario(string nome, string senha, string email, string data)
         {
-            var validarEmail = ValidarEmail(email);
+            ValidacaoUsuario validacaoUsuario = new ValidacaoUsuario(_usuarioRepositorio);
+            var idValidarEmail = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
+
+            var validarEmail = validacaoUsuario.EmailPodeSerCriado(email, idValidarEmail);
             var validarSenha = Validacao.ValidarSenha(senha);
             var validarNome = Validacao.ValidarNome(nome);
             var validarDataNascimento = Validacao.ValidarDataNascimento(data);
@@ -107,18 +112,6 @@ namespace CrudBasico
             }
 
             return string.Empty;
-        }
-
-        private (bool validacao, string messagem) ValidarEmail(string email) 
-
-        {
-            var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
-            var emailPodeSerCriado = ValidacaoUsuario.EmailPodeSerCriado(email, id);
-            if (!emailPodeSerCriado.validacao)
-            {
-                return emailPodeSerCriado;
-            }
-            return Validacao.ValidarEmail(email);
         }
 
         private void QuandoCampoDeEntradaEmailMudar(object sender, EventArgs e)

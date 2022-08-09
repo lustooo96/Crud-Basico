@@ -22,7 +22,7 @@ namespace CrudBasico.Infra.Repositorios
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
-                string consultarParaSalvarUsuario = @"INSERT INTO dbo.usuario (nome, senha, email, data_nascimento, data_criacao) 
+                const string consultarParaSalvarUsuario = @"INSERT INTO dbo.usuario (nome, senha, email, data_nascimento, data_criacao) 
                             VALUES (@Nome, @Senha, @Email, @Data_nascimento , @Data_criacao)";
 
                 using (SqlCommand comando = new SqlCommand(consultarParaSalvarUsuario, conexao))
@@ -39,7 +39,7 @@ namespace CrudBasico.Infra.Repositorios
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
-                string consultaParaEditarUsuario = "UPDATE dbo.usuario SET nome =@Nome, senha = @Senha, email = @Email, " +
+                const string consultaParaEditarUsuario = "UPDATE dbo.usuario SET nome =@Nome, senha = @Senha, email = @Email, " +
                                                     "data_nascimento = @Data_nascimento " +
                                                      "WHERE idusuario = @Id";
 
@@ -57,7 +57,7 @@ namespace CrudBasico.Infra.Repositorios
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
-                string consultaParaDeletarUsuario = "DELETE FROM dbo.usuario WHERE idusuario = @Id";
+                const string consultaParaDeletarUsuario = "DELETE FROM dbo.usuario WHERE idusuario = @Id";
                 using (SqlCommand comando = new SqlCommand(consultaParaDeletarUsuario, conexao))
                 {
                     comando.Parameters.AddWithValue("@Id", id);
@@ -66,13 +66,36 @@ namespace CrudBasico.Infra.Repositorios
             }
         }
 
+        public Usuario? BuscarUmUsuarioComEmailRepetido(string email) 
+        {
+            if (email == null) throw new Exception("O email do Usuário não foi informado");
+            Usuario? usuario = null;
+            using (SqlConnection conexao = new SqlConnection(ConexaoString))
+            {
+                conexao.Open();
+                const string consultaParaListarTodosUsuarios = "SELECT * FROM dbo.usuario where email = @Email";
+                using (SqlCommand comando = new SqlCommand(consultaParaListarTodosUsuarios, conexao))
+                {
+                    comando.Parameters.AddWithValue("@Email", email);
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usuario = CriarUsuarioAtravesDoBanco(reader);
+                        }
+                    }
+                }
+            }
+            return usuario;
+        }
+
         public List<Usuario> Listar()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
                 conexao.Open();
-                string consultaParaListarTodosUsuarios = "SELECT * FROM dbo.usuario";
+                const string consultaParaListarTodosUsuarios = "SELECT * FROM dbo.usuario";
                 using (SqlCommand comando = new SqlCommand(consultaParaListarTodosUsuarios, conexao))
                 {
                     using (SqlDataReader reader = comando.ExecuteReader())
@@ -87,12 +110,12 @@ namespace CrudBasico.Infra.Repositorios
             return listaUsuarios.ToList();
         }
 
-        public Usuario BuscarUsuarioPorId(string id)
+        public Usuario BuscarUsuarioPorId(int id)
         {
             Usuario? usuario = null;
             using (SqlConnection conexao = new SqlConnection(ConexaoString))
             {
-                string consultaParaBuscarApenasUmUsuario = "SELECT * FROM dbo.usuario WHERE idusuario = @id";
+                const string consultaParaBuscarApenasUmUsuario = "SELECT * FROM dbo.usuario WHERE idusuario = @id";
                 conexao.Open();
                 using (SqlCommand comando = new SqlCommand(consultaParaBuscarApenasUmUsuario, conexao))
                 {
@@ -128,22 +151,24 @@ namespace CrudBasico.Infra.Repositorios
 
         private void CriarParametrosDoSqlCommandParaUsuario(SqlCommand comando, Usuario usuario)
         {
-            if (usuario.IdUsuario.HasValue)
+            if (usuario.IdUsuario.HasValue) 
             {
                 comando.Parameters.AddWithValue("@Id", usuario.IdUsuario);
-            }
+            } 
+            
             comando.Parameters.AddWithValue("@Nome", usuario.Nome);
             comando.Parameters.AddWithValue("@Senha", ServicoDeCriptografia.CriptografarSenha(usuario.Senha));
             comando.Parameters.AddWithValue("@Email", usuario.Email);
+            comando.Parameters.AddWithValue("@Data_criacao", usuario.DataCriacao);
+
             if (usuario.DataNascimento == null)
             {
                 comando.Parameters.AddWithValue("@Data_nascimento", DBNull.Value);
             }
-            else
+            else 
             {
                 comando.Parameters.AddWithValue("@Data_nascimento", usuario.DataNascimento);
             }
-            comando.Parameters.AddWithValue("@Data_criacao", usuario.DataCriacao);
         }
     }
 }
