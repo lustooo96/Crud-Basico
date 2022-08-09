@@ -23,7 +23,8 @@ namespace CrudBasico
 
         private static void ConfigurarServicosInjecao(IServiceCollection servicos) 
         {
-            servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioSqlServer>();
+            //servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioSqlServer>();
+            servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioLinqToBd>();
         }
     }
 }
