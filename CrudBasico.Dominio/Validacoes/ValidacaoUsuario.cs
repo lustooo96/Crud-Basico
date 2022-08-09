@@ -1,5 +1,6 @@
 ﻿using CrudBasico.Dominio.Interfaces;
 using CrudBasico.Dominio.Modelos;
+using CrudBasico.Infra.Validacoes;
 
 namespace CrudBasico.Dominio.Validacoes
 {
@@ -13,16 +14,16 @@ namespace CrudBasico.Dominio.Validacoes
 
         }
 
-        public (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id = 0)
+        public (bool validacao, string mensagem) EmailPodeSerCriado(string email, int id)
         {
             var resultadoUsuario = _usuarioRepositorio.BuscarUmUsuarioComEmailRepetido(email);
-            if (resultadoUsuario == null || resultadoUsuario.IdUsuario == id)
-            {
-                return (true, "");
-            }
-            else
+            if (resultadoUsuario != null && resultadoUsuario.IdUsuario != id)
             {
                 return (false, "Email já Cadastrado");
+            }
+            else 
+            {
+                return Validacao.ValidarEmail(email);
             }
         }
     }

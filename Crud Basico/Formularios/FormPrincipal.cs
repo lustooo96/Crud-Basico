@@ -35,7 +35,7 @@ namespace CrudBasico
                 MessageBox.Show(erro.Message, "Ocorreu um Erro");
             }
         }
-
+          
         private Usuario ObterUsuarioSelecionado()
         {
             if (dataGridView1.SelectedCells.Count == decimal.Zero) throw new Exception("Selecione um usuário");

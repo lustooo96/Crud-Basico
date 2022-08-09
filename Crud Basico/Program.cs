@@ -12,8 +12,9 @@ namespace CrudBasico
         {
             ApplicationConfiguration.Initialize();
             IHost builder = CriarServicoInjecao().Build();
-            FormPrincipal formPrincipal = builder.Services.GetRequiredService<FormPrincipal>();
-            Application.Run(formPrincipal);
+            var usuarioRepositorio = builder.Services.GetService<IUsuarioRepositorio>();
+
+            Application.Run(new FormPrincipal(usuarioRepositorio));
         }
 
         private static IHostBuilder CriarServicoInjecao() =>
@@ -22,7 +23,7 @@ namespace CrudBasico
 
         private static void ConfigurarServicosInjecao(IServiceCollection servicos) 
         {
-            servicos.AddTransient<IUsuarioRepositorio, RepositorioUsuarioSqlServer>().AddTransient<FormPrincipal>();
+            servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioSqlServer>();
         }
     }
 }

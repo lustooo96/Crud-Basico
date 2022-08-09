@@ -19,7 +19,7 @@ namespace CrudBasico
 
         private void AoClicarEmSalvarRegistro(object sender, EventArgs e)
         {
-            try
+                try
             {
                 var formUsuarioValidado = ValidarFormularioUsuario(campoEntradaNome.Text,
                     campoEntradaSenha.Text,campoEntradaEmail.Text, campoEntradaDataNascimento.Text);
@@ -79,7 +79,10 @@ namespace CrudBasico
         
         private bool ValidarFormularioUsuario(string nome, string senha, string email, string data)
         {
-            var validarEmail = ValidarEmail(email);
+            ValidacaoUsuario validacaoUsuario = new ValidacaoUsuario(_usuarioRepositorio);
+            var idValidarEmail = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
+
+            var validarEmail = validacaoUsuario.EmailPodeSerCriado(email, idValidarEmail);
             var validarSenha = Validacao.ValidarSenha(senha);
             var validarNome = Validacao.ValidarNome(nome);
             var validarDataNascimento = Validacao.ValidarDataNascimento(data);
@@ -109,19 +112,6 @@ namespace CrudBasico
             }
 
             return string.Empty;
-        }
-
-        private (bool validacao, string messagem) ValidarEmail(string email) 
-
-        {
-            var id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : (int)decimal.Zero;
-            var validacaoUsuario = new ValidacaoUsuario(_usuarioRepositorio);
-            var emailPodeSerCriado = validacaoUsuario.EmailPodeSerCriado(email, id);
-            if (!emailPodeSerCriado.validacao)
-            {
-                return emailPodeSerCriado;
-            }
-            return Validacao.ValidarEmail(email);
         }
 
         private void QuandoCampoDeEntradaEmailMudar(object sender, EventArgs e)
