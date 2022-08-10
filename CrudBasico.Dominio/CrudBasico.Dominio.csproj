@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.2.0" />
     <PackageReference Include="linq2db.SqlServer" Version="4.1.1" />
   </ItemGroup>
 

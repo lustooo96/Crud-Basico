@@ -11,7 +11,7 @@ namespace CrudBasico.Dominio.Modelos
         [Column(Name = "email"), NotNull]  public string Email { get; set; }
         [Column(Name = "data_nascimento")]  public DateTime? DataNascimento { get; set; }
         [Column(Name = "data_criacao"), NotNull]  public DateTime DataCriacao { get; set; }
-
+         
         public Usuario() 
         { 
         }

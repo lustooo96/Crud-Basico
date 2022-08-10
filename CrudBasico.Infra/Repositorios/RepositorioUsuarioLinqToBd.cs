@@ -15,67 +15,113 @@ namespace CrudBasico.Infra.Repositorios
 
         public void Salvar(Usuario usuario)
         {
-            usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
-            using (var db = new BancoLinqToBD())
+            try 
             {
-                db.Insert(usuario);
+                usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
+                using (var db = new BancoLinqToBD())
+                {
+                    db.Insert(usuario);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
+        }
+
+        public void Atualizar(Usuario usuario)
+        {
+            try {
+                usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
+                using (var db = new BancoLinqToBD())
+                {
+                    db.Update(usuario);
+                }
+            } 
+            catch (Exception error) 
+            {
+                throw new Exception(error.Message);
+            } 
+        }
+
+        public void Remover(int id)
+        {
+            try
+            {
+                using (var db = new BancoLinqToBD())
+                {
+                    db.Usuario
+                            .Where(usuario => usuario.IdUsuario == id)
+                            .Delete();
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
             }
         }
 
         public List<Usuario> Listar()
         {
-            using (var db = new BancoLinqToBD())
+            try 
             {
-                var query = from usuario in db.Usuario select usuario;
-                return query.ToList();
+                using (var db = new BancoLinqToBD())
+                {
+                    var query = from usuario in db.Usuario select usuario;
+                    return query.ToList();
+                }
             }
-        }
-
-        public void Atualizar(Usuario usuario)
-        {   
-            usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
-            using (var db = new BancoLinqToBD())
+            catch (Exception error)
             {
-                db.Update(usuario);
+                throw new Exception(error.Message);
             }
-        }
-
-        public Usuario BuscarUmUsuarioComEmailRepetido(string email)
-        {
-            using (var db = new BancoLinqToBD())
-            {
-                var query = from usuario in db.Usuario 
-                                where usuario.Email == email 
-                                select usuario;
-                return query as Usuario;
-            }
+            
         }
 
         public Usuario BuscarUsuarioPorId(int id)
         {
-            using (var db = new BancoLinqToBD())
+            try 
             {
-                var query = from usuario in db.Usuario 
+                using (var db = new BancoLinqToBD())
+                {
+                    var query = from usuario in db.Usuario
                                 where usuario.IdUsuario == id
                                 select UsuarioComSenhaDescriptografada(usuario);
-                return query.Single();
+                    return query.Single();
+                }
             }
-        }
-
-        public void Remover(int id)
-        {
-            using (var db = new BancoLinqToBD())
+            catch (Exception error)
             {
-                db.Usuario
-                        .Where(usuario => usuario.IdUsuario == id)
-                        .Delete();
+                throw new Exception(error.Message);
             }
+            
         }
 
         private static Usuario UsuarioComSenhaDescriptografada(Usuario usuario)
         {
             usuario.Senha = ServicoDeCriptografia.DescriptografarSenha(usuario.Senha);
             return usuario;
+        }
+
+        public Usuario? BuscarUmUsuarioComEmailRepetido(string email)
+        {
+            try 
+            {
+                using (var db = new BancoLinqToBD())
+                {
+                    var query = from usuario in db.Usuario
+                                where usuario.Email == email
+                                select usuario;
+
+                    var EmailDoUsuario = query.FirstOrDefault(usuario => usuario.Email == email);
+
+                    return EmailDoUsuario;
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(error.Message);
+            }
         }
     }
 }
