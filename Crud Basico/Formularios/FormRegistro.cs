@@ -29,7 +29,7 @@ namespace CrudBasico
 
 
                 int? id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : null;
-                var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
+                var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
 
                 var usuario = new Usuario(
                     id,
