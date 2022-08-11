@@ -105,6 +105,7 @@
             this.campoEntradaSenha.Location = new System.Drawing.Point(129, 123);
             this.campoEntradaSenha.MaxLength = 14;
             this.campoEntradaSenha.Name = "campoEntradaSenha";
+            this.campoEntradaSenha.PasswordChar = '*';
             this.campoEntradaSenha.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaSenha.TabIndex = 3;
             // 
