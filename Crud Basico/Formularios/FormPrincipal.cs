@@ -1,16 +1,18 @@
 using CrudBasico.Dominio.Interfaces;
 using CrudBasico.Dominio.Modelos;
-using CrudBasico.Infra.Repositorios;
+using FluentValidation;
 
 namespace CrudBasico
 {
     public partial class FormPrincipal : Form
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly IValidator<Usuario> _usarioValidador;
 
-        public FormPrincipal(IUsuarioRepositorio usuarioRepositorio)
+        public FormPrincipal(IUsuarioRepositorio usuarioRepositorio , IValidator<Usuario> usarioValidador)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _usarioValidador = usarioValidador;
             InitializeComponent();
         }
         
@@ -49,7 +51,7 @@ namespace CrudBasico
             try
             { 
                 var usuarioSelecionado = ObterUsuarioSelecionado();
-                var telaRegistro = new FormRegistro(usuarioSelecionado , _usuarioRepositorio);
+                var telaRegistro = new FormRegistro(usuarioSelecionado , _usuarioRepositorio , _usarioValidador);
 
                 telaRegistro.ShowDialog();
             }
@@ -63,7 +65,7 @@ namespace CrudBasico
         {
             try
             {
-                var telaRegistro = new FormRegistro(null , _usuarioRepositorio);
+                var telaRegistro = new FormRegistro(null, _usuarioRepositorio,_usarioValidador);
                 telaRegistro.ShowDialog();
             }
             catch (Exception erro)

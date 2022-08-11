@@ -9,12 +9,14 @@ namespace CrudBasico
     public partial class FormRegistro : Form
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly IValidator<Usuario> _usarioValidador;
         private bool EditarRegistro = false;
 
-        public FormRegistro(Usuario usuario, IUsuarioRepositorio usuarioRepositorio)
+        public FormRegistro(Usuario usuario, IUsuarioRepositorio usuarioRepositorio,IValidator<Usuario> usarioValidador)
         {
             InitializeComponent();
             _usuarioRepositorio = usuarioRepositorio;
+            _usarioValidador = usarioValidador;
             if (usuario != null) CarregarDadosParaEditarRegistro(usuario);
         }
 
@@ -29,7 +31,9 @@ namespace CrudBasico
                 int? id = EditarRegistro ? Convert.ToInt32(campoEntradaId.Text) : null;
                 var dataCriacao = EditarRegistro ? DateTime.Parse(campoEntradaDataCriacao.Text) : DateTime.Now;
 
-                var usuario = new Usuario(id,campoEntradaNome.Text,
+                var usuario = new Usuario(
+                    id,
+                    campoEntradaNome.Text,
                     campoEntradaSenha.Text,
                     campoEntradaEmail.Text,
                     dataNascimento,
@@ -47,7 +51,7 @@ namespace CrudBasico
             }
             catch (Exception erro) 
             {
-                MessageBox.Show(erro.Message + "\n" + erro.InnerException.Message);
+                MessageBox.Show(erro.Message);
             }
         }
 
@@ -60,8 +64,7 @@ namespace CrudBasico
         {
             try {
                 string stringMensagemErro = "";
-                var validator = new UsuarioValidador(_usuarioRepositorio);
-                var validRes = validator.Validate(usuario);
+                var validRes = _usarioValidador.Validate(usuario);
                 if (!validRes.IsValid)
                 {
                     foreach (var erro in validRes.Errors)
@@ -75,7 +78,7 @@ namespace CrudBasico
             
             catch(Exception erro) 
             {
-                MessageBox.Show(erro.Message, "Erro De Validação");
+                MessageBox.Show(erro.Message, "Erro De Validação" , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }

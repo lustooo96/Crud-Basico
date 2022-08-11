@@ -2,6 +2,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CrudBasico.Infra.Repositorios;
 using CrudBasico.Dominio.Interfaces;
+using CrudBasico.Infra.ConexaoLinqToDB;
+using FluentValidation;
+using CrudBasico.Dominio.Validacoes;
+using CrudBasico.Dominio.Modelos;
 
 namespace CrudBasico
 {
@@ -13,8 +17,8 @@ namespace CrudBasico
             ApplicationConfiguration.Initialize();
             IHost builder = CriarServicoInjecao().Build();
             var usuarioRepositorio = builder.Services.GetService<IUsuarioRepositorio>();
-
-            Application.Run(new FormPrincipal(usuarioRepositorio));
+            var usarioValidador = builder.Services.GetService<IValidator<Usuario>>();
+            Application.Run(new FormPrincipal(usuarioRepositorio , usarioValidador));
         }
 
         private static IHostBuilder CriarServicoInjecao() =>
@@ -23,8 +27,9 @@ namespace CrudBasico
 
         private static void ConfigurarServicosInjecao(IServiceCollection servicos) 
         {
-            //servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioSqlServer>();
-            servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioLinqToBd>();
+            servicos.AddScoped<IUsuarioRepositorio, RepositorioUsuarioLinqToBd>()
+            .AddScoped<BancoLinqToBD>()
+            .AddScoped<IValidator<Usuario>, UsuarioValidador>();
         }
     }
 }

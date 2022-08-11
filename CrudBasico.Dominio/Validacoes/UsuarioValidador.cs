@@ -22,12 +22,10 @@ namespace CrudBasico.Dominio.Validacoes
                 .WithMessage("Informe alguma senha");
 
             RuleFor(usuario => usuario.Email)
-                .NotEmpty()
-                .WithMessage("Informe algum email")
                 .Must(ValidarEmail)
                 .WithMessage("Informe um email válido")
                 .Must((usuario , email) => EmailPodeSerCriado(usuario , email))
-                .WithMessage("Informe um email válidoooo");
+                .WithMessage("Email já Cadastrado");
 
             RuleFor(usuario => usuario.DataNascimento)
                 .LessThanOrEqualTo(DateTime.Now)
