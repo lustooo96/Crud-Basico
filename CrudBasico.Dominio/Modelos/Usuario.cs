@@ -1,15 +1,17 @@
-﻿namespace CrudBasico.Dominio.Modelos
+﻿using LinqToDB.Mapping;
+
+namespace CrudBasico.Dominio.Modelos
 {
+    [Table(Name = "usuario")]
     public class Usuario
     {
-      
-        public int? IdUsuario { get; set; }
-        public string Nome { get; set; }
-        public string Senha { get; set; }
-        public string Email { get; set; }
-        public DateTime? DataNascimento { get; set; }
-        public DateTime DataCriacao { get; set; }
-
+        [Column(Name = "idusuario"), PrimaryKey, Identity]  public int? IdUsuario { get; set; }
+        [Column(Name = "nome"), NotNull]  public string Nome { get; set; }
+        [Column(Name = "senha"), NotNull]  public string Senha { get; set; }
+        [Column(Name = "email"), NotNull]  public string Email { get; set; }
+        [Column(Name = "data_nascimento")]  public DateTime? DataNascimento { get; set; }
+        [Column(Name = "data_criacao"), NotNull]  public DateTime DataCriacao { get; set; }
+         
         public Usuario() 
         { 
         }

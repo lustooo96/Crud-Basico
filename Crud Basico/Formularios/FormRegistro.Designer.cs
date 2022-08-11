@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.campoEntradaDataNascimento = new System.Windows.Forms.MaskedTextBox();
             this.campoEntradaDataCriacao = new System.Windows.Forms.MaskedTextBox();
@@ -44,15 +43,7 @@
             this.campoEntradaNome = new System.Windows.Forms.TextBox();
             this.cancelarOperacao = new System.Windows.Forms.Button();
             this.salvarRegistro = new System.Windows.Forms.Button();
-            this.erroNome = new System.Windows.Forms.ErrorProvider(this.components);
-            this.erroSenha = new System.Windows.Forms.ErrorProvider(this.components);
-            this.erroEmail = new System.Windows.Forms.ErrorProvider(this.components);
-            this.erroData = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.erroNome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroSenha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroEmail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroData)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,7 +76,6 @@
             this.campoEntradaDataNascimento.Size = new System.Drawing.Size(91, 23);
             this.campoEntradaDataNascimento.TabIndex = 5;
             this.campoEntradaDataNascimento.ValidatingType = typeof(System.DateTime);
-            this.campoEntradaDataNascimento.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaDataNascimentoMudar);
             // 
             // campoEntradaDataCriacao
             // 
@@ -118,7 +108,6 @@
             this.campoEntradaSenha.PasswordChar = '*';
             this.campoEntradaSenha.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaSenha.TabIndex = 3;
-            this.campoEntradaSenha.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaSenhaMudar);
             // 
             // labelDataNascimento
             // 
@@ -149,7 +138,6 @@
             this.campoEntradaEmail.Name = "campoEntradaEmail";
             this.campoEntradaEmail.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaEmail.TabIndex = 4;
-            this.campoEntradaEmail.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaEmailMudar);
             // 
             // labelSenha
             // 
@@ -201,7 +189,6 @@
             this.campoEntradaNome.Name = "campoEntradaNome";
             this.campoEntradaNome.Size = new System.Drawing.Size(246, 23);
             this.campoEntradaNome.TabIndex = 2;
-            this.campoEntradaNome.TextChanged += new System.EventHandler(this.QuandoCampoDeEntradaEmailMudar);
             // 
             // cancelarOperacao
             // 
@@ -238,22 +225,6 @@
             this.salvarRegistro.UseVisualStyleBackColor = false;
             this.salvarRegistro.Click += new System.EventHandler(this.AoClicarEmSalvarRegistro);
             // 
-            // erroNome
-            // 
-            this.erroNome.ContainerControl = this;
-            // 
-            // erroSenha
-            // 
-            this.erroSenha.ContainerControl = this;
-            // 
-            // erroEmail
-            // 
-            this.erroEmail.ContainerControl = this;
-            // 
-            // erroData
-            // 
-            this.erroData.ContainerControl = this;
-            // 
             // FormRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -267,10 +238,6 @@
             this.Text = "Novo Usuário";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.erroNome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroSenha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroEmail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.erroData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,10 +257,6 @@
         private Label labelDataCriacao;
         private TextBox campoEntradaSenha;
         private Label labelDataNascimento;
-        private ErrorProvider erroNome;
-        private ErrorProvider erroSenha;
-        private ErrorProvider erroEmail;
-        private ErrorProvider erroData;
         private MaskedTextBox campoEntradaDataCriacao;
         private MaskedTextBox campoEntradaDataNascimento;
     }
