@@ -15,23 +15,25 @@ namespace CrudBasico.Dominio.Validacoes
 
             RuleFor(usuario => usuario.Nome)
                 .NotEmpty()
-                .WithMessage("Informe seu Nome");
+                .WithMessage("Necessario informar o Nome");
 
             RuleFor(usuario => usuario.Senha)
                 .NotEmpty()
-                .WithMessage("Informe alguma senha");
+                .WithMessage("Necessario informar a Senha");
 
             RuleFor(usuario => usuario.Email)
+                .NotEmpty()
+                .WithMessage("Nécessario informar o Email")
                 .Must(ValidarEmail)
-                .WithMessage("Informe um email válido")
+                .WithMessage("Email inválido , informe um email @ e .com")
                 .Must((usuario , email) => EmailPodeSerCriado(usuario , email))
                 .WithMessage("Email já Cadastrado");
 
             RuleFor(usuario => usuario.DataNascimento)
                 .LessThanOrEqualTo(DateTime.Now)
-                .WithMessage("Datá invalida")
+                .WithMessage("Data de nascimento invalida")
                 .GreaterThan(DateTime.Parse("19/08/1900"))
-                .WithMessage("Datá invalida")
+                .WithMessage("Data de nascimento invalida , informe uma data maior que 19/08/1900")
                 .Equals("");
         }
 
@@ -47,11 +49,13 @@ namespace CrudBasico.Dominio.Validacoes
         }
         private static bool ValidarEmail(string email)
         {
-            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
+            if (!string.IsNullOrWhiteSpace(email)) 
+            {
+                string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)"
                 + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
 
-            if (!new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(email)) return false;
-
+                if (!new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(email)) return false;
+            }
             return true;
         }
 

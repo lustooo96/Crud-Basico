@@ -1,5 +1,5 @@
 ﻿using CrudBasico.Dominio.Modelos;
-using CrudBasico.Infra.ConexaoLinqToDB;
+using CrudBasico.Infra.BancoLinqToDB;
 using CrudBasico.Dominio.Interfaces;
 using LinqToDB;
 using CrudBasico.Dominio.Servicos;
@@ -23,7 +23,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception("Não foi possível SALVAR o USUÁRIO");
             }
             finally
             {
@@ -40,7 +40,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception("Não foi possível ATUALIZAR o USUÁRIO");
             }
             finally 
             {
@@ -58,7 +58,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception("Não foi possível REMOVER o Usuário");
             }
             finally 
             {
@@ -75,7 +75,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception("Não foi encontrado nenhum USUÁRIO para listar");
             }
             finally
             {
@@ -94,7 +94,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception($"Usuário com o ID : {id} , não encontrado");
             }
             finally
             {
@@ -122,7 +122,7 @@ namespace CrudBasico.Infra.Repositorios
             }
             catch (Exception error)
             {
-                throw new Exception(error.Message);
+                throw new Exception($"O {email} não foi encontrado");
             }
             finally
             {
