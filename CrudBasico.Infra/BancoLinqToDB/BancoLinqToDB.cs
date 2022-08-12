@@ -1,7 +1,7 @@
 ﻿using CrudBasico.Dominio.Modelos;
 using LinqToDB;
 
-namespace CrudBasico.Infra.ConexaoLinqToDB
+namespace CrudBasico.Infra.BancoLinqToDB
 {
     public class BancoLinqToBD : LinqToDB.Data.DataConnection
     {

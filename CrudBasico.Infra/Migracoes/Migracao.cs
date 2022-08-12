@@ -1,11 +1,9 @@
 ﻿using FluentMigrator.Runner;
-using FluentMigrator.Runner.Initialization;
 using Microsoft.Extensions.DependencyInjection;
-using test;
 
 namespace CrudBasico.Infra.Migracoes
 {
-    public class ConexaoMigracao
+    public class Migracao
     {
 
         private static string ConexaoString = "Server=INVENT0081\\SQLEXPRESS;Database=dados;Trusted_Connection=True;Encrypt=False";
@@ -16,7 +14,7 @@ namespace CrudBasico.Infra.Migracoes
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(ConexaoString)
-                    .ScanIn(typeof(AddUsuarioTable).Assembly).For.Migrations())
+                    .ScanIn(typeof(AdicionarTabelaDeUsuario).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }

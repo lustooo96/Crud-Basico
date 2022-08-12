@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CrudBasico.Infra.Repositorios;
 using CrudBasico.Dominio.Interfaces;
-using CrudBasico.Infra.ConexaoLinqToDB;
+using CrudBasico.Infra.BancoLinqToDB;
 using FluentValidation;
 using CrudBasico.Dominio.Validacoes;
 using CrudBasico.Dominio.Modelos;
@@ -15,17 +15,18 @@ namespace CrudBasico
         [STAThread]
         static void Main()
         {
-            var serviceProvider = ConexaoMigracao.CriarServicos();
-
-            using (var scope = serviceProvider.CreateScope())
+            var servicoDeMigracoes = Migracao.CriarServicos();
+            using (var servico = servicoDeMigracoes.CreateScope())
             {
-                ConexaoMigracao.AtualizarBancoDeDados(scope.ServiceProvider);
+                Migracao.AtualizarBancoDeDados(servico.ServiceProvider);
             }
 
             ApplicationConfiguration.Initialize();
             IHost builder = CriarServicoInjecao().Build();
+
             var usuarioRepositorio = builder.Services.GetService<IUsuarioRepositorio>();
             var usarioValidador = builder.Services.GetService<IValidator<Usuario>>();
+
             Application.Run(new FormPrincipal(usuarioRepositorio , usarioValidador));
         }
 

@@ -1,5 +1,5 @@
 ﻿using CrudBasico.Dominio.Modelos;
-using CrudBasico.Infra.ConexaoLinqToDB;
+using CrudBasico.Infra.BancoLinqToDB;
 using CrudBasico.Dominio.Interfaces;
 using LinqToDB;
 using CrudBasico.Dominio.Servicos;

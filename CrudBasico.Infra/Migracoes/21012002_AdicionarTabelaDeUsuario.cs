@@ -1,9 +1,9 @@
 ﻿using FluentMigrator;
 
-namespace test
+namespace CrudBasico.Infra.Migracoes
 {
     [Migration(20190430121800)]
-    public class AddUsuarioTable : Migration
+    public class AdicionarTabelaDeUsuario : Migration
     {
         public override void Up()
         {
