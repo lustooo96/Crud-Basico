@@ -18,6 +18,7 @@ namespace CrudBasico.Infra.Repositorios
         {
             try 
             {
+                usuario.DataCriacao = DateTime.Now;
                 usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
                 _bancoLinqToDB.Insert(usuario);
             }
@@ -36,7 +37,13 @@ namespace CrudBasico.Infra.Repositorios
             try
             {
                 usuario.Senha = ServicoDeCriptografia.CriptografarSenha(usuario.Senha);
-                _bancoLinqToDB.Update(usuario);
+                _bancoLinqToDB.Usuario
+                    .Where(usuarioDoBanco => usuarioDoBanco.IdUsuario == usuario.IdUsuario)
+                    .Set(usuarioDoBanco => usuarioDoBanco.Nome, usuario.Nome)
+                    .Set(usuarioDoBanco => usuarioDoBanco.Senha, usuario.Senha)
+                    .Set(usuarioDoBanco => usuarioDoBanco.Email, usuario.Email)
+                    .Set(usuarioDoBanco => usuarioDoBanco.DataNascimento, usuario.DataNascimento)
+                    .Update();
             }
             catch (Exception error)
             {
@@ -70,7 +77,14 @@ namespace CrudBasico.Infra.Repositorios
         {
             try 
             {
-                var query = from usuario in _bancoLinqToDB.Usuario select usuario;
+                var query = from usuario in _bancoLinqToDB.Usuario select new Usuario
+                {
+                    IdUsuario = usuario.IdUsuario,
+                    Nome = usuario.Nome,
+                    Email = usuario.Email,
+                    DataNascimento = usuario.DataNascimento,
+                    DataCriacao = usuario.DataCriacao,
+                };
                 return query.ToList();
             }
             catch (Exception error)
@@ -89,7 +103,14 @@ namespace CrudBasico.Infra.Repositorios
             {
                 var query = from usuario in _bancoLinqToDB.Usuario
                             where usuario.IdUsuario == id
-                            select UsuarioComSenhaDescriptografada(usuario);
+                            select new Usuario
+                            {
+                                IdUsuario = usuario.IdUsuario,
+                                Nome = usuario.Nome,
+                                Email = usuario.Email,
+                                DataNascimento = usuario.DataNascimento,
+                                DataCriacao = usuario.DataCriacao,
+                            };
                 return query.Single();  
             }
             catch (Exception error)
@@ -101,10 +122,9 @@ namespace CrudBasico.Infra.Repositorios
                 _bancoLinqToDB.Close();
             }
         }
-
         private static Usuario UsuarioComSenhaDescriptografada(Usuario usuario)
         {
-            usuario.Senha = ServicoDeCriptografia.DescriptografarSenha(usuario.Senha);
+            usuario.Senha = null;
             return usuario;
         }
 
