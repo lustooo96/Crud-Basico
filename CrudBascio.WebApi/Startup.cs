@@ -4,6 +4,8 @@ using CrudBasico.Dominio.Validacoes;
 using CrudBasico.Infra.BancoLinqToDB;
 using CrudBasico.Infra.Repositorios;
 using FluentValidation;
+using Hellang.Middleware.ProblemDetails;
+using Microsoft.Extensions.Hosting;
 
 namespace CrudBascio.WebApi
 {
@@ -26,10 +28,21 @@ namespace CrudBascio.WebApi
             services.AddScoped<IValidator<Usuario>, UsuarioValidador>();
             
             services.AddControllers();
+            services.AddProblemDetails(
+                optd => 
+                {
+                    optd.IncludeExceptionDetails = (ctx, ex) =>
+                    {
+                        var env = ctx.RequestServices.GetRequiredService<IHostEnvironment>();
+                        return env.IsStaging();
+                    };
+                });
         }
-
+            
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseProblemDetails();
+
             app.UseCors("CorsPolicy");
 
             app.UseRouting();

@@ -1,6 +1,6 @@
 using CrudBasico.Dominio.Interfaces;
 using CrudBasico.Dominio.Modelos;
-using Microsoft.AspNetCore.Cors;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -11,9 +11,11 @@ namespace CrudBascio.WebApi.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
+        private readonly IValidator<Usuario> _usarioValidador;
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio , IValidator<Usuario> usarioValidador)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _usarioValidador = usarioValidador;
         }
 
         [HttpGet]
@@ -53,12 +55,13 @@ namespace CrudBascio.WebApi.Controllers
         {
             try
             {
+                _usarioValidador.ValidateAndThrow(usuario);
                 _usuarioRepositorio.Salvar(usuario);
                 return NoContent();
             }
             catch (Exception error)
             {
-                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError), this);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError), new JsonResult(error.Message));
             }
         }
 
@@ -67,12 +70,13 @@ namespace CrudBascio.WebApi.Controllers
         {
             try
             {
+                _usarioValidador.ValidateAndThrow(usuario);
                 _usuarioRepositorio.Atualizar(usuario);
                 return NoContent();
             }
             catch (Exception error)
             {
-                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError), this);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError), new JsonResult(error.Message));
             }
         }
 
