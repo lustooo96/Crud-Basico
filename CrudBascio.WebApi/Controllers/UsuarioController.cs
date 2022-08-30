@@ -23,7 +23,7 @@ namespace CrudBascio.WebApi.Controllers
         {
             try
             {
-                var usuarios = _usuarioRepositorio.Listar();
+                List<Usuario>? usuarios = _usuarioRepositorio.Listar();
                 if (usuarios == null) return NotFound();
                 return Ok(usuarios);
             }
@@ -55,9 +55,12 @@ namespace CrudBascio.WebApi.Controllers
         {
             try
             {
-                _usarioValidador.ValidateAndThrow(usuario);
-                _usuarioRepositorio.Salvar(usuario);
-                return NoContent();
+                var result = _usarioValidador.Validate(usuario);
+                if (result.IsValid) {
+                    _usuarioRepositorio.Salvar(usuario);
+                    return NoContent();
+                }   
+                return BadRequest(new JsonResult(result.Errors));
             }
             catch (Exception error)
             {
@@ -70,9 +73,13 @@ namespace CrudBascio.WebApi.Controllers
         {
             try
             {
-                _usarioValidador.ValidateAndThrow(usuario);
-                _usuarioRepositorio.Atualizar(usuario);
-                return NoContent();
+                var result = _usarioValidador.Validate(usuario);
+                if (result.IsValid)
+                {
+                    _usuarioRepositorio.Atualizar(usuario);
+                    return NoContent();
+                }
+                return BadRequest(new JsonResult(result.Errors));
             }
             catch (Exception error)
             {

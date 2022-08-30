@@ -30,8 +30,8 @@ namespace CrudBasico.Dominio.Validacoes
                 .WithMessage("Email já Cadastrado");
 
             RuleFor(usuario => usuario.DataNascimento)
-                .LessThanOrEqualTo(DateTime.Now)
-                .WithMessage("Data de nascimento invalida")
+                .LessThan   (DateTime.Now)
+                .WithMessage("Data de nascimento invalida, informe um data inferior ou igual a hoje")
                 .GreaterThan(DateTime.Parse("19/08/1900"))
                 .WithMessage("Data de nascimento invalida , informe uma data maior que 19/08/1900")
                 .Equals("");
